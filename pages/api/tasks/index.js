@@ -2,7 +2,7 @@
 import dbConnect from "@/db/connect";
 import Task from "@/db/models/Task";
 
-export default async function handler(req, res) {
+export default async function handler(request, response) {
   await dbConnect();
 
   if (request.method === "GET") {
