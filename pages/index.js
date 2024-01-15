@@ -3,6 +3,7 @@ import Head from "next/head";
 import { Inter } from "next/font/google";
 import { Link } from "@chakra-ui/next-js";
 import InputForm from "@/components/inputForm";
+import TaskList from "@/components/TaskList";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,6 +17,7 @@ export default function Home() {
         About
       </Link>
       <InputForm></InputForm>
+      <TaskList />
     </>
   );
 }
