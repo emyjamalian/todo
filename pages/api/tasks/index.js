@@ -14,6 +14,7 @@ export default async function handler(request, response) {
     try {
       const taskTitle = request.body;
       const task = new Task(taskTitle);
+      console.log("BEtask", task);
       await task.save();
       return response.status(201).json({ status: "Task created." });
     } catch (error) {
