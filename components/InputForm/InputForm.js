@@ -3,7 +3,7 @@ import { AddIcon } from "@chakra-ui/icons";
 // import useSWR from "swr";
 
 export default function InputForm() {
-//   const { mutate } = useSWR(`/api/tasks/`);
+  const { mutate } = useSWR(`/api/tasks/`);
   async function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
@@ -19,7 +19,7 @@ export default function InputForm() {
         throw new Error("Error!");
       }
       event.target.reset();
-    //   mutate();
+      mutate();
     } catch (error) {
       console.log("ERROR !!");
     }
