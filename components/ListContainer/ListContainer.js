@@ -1,5 +1,6 @@
 import { Container, Heading, Box } from "@chakra-ui/react";
 import InputForm from "../InputForm/InputForm";
+import TaskList from "../TaskList";
 
 export default function ListContainer({ listTitle }) {
   return (
@@ -16,6 +17,7 @@ export default function ListContainer({ listTitle }) {
           {listTitle}
         </Heading>
         <InputForm />
+        <TaskList />
       </Container>
     </Box>
   );

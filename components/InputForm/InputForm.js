@@ -1,6 +1,6 @@
 import { Input, InputLeftElement, InputGroup } from "@chakra-ui/react";
 import { AddIcon } from "@chakra-ui/icons";
-// import useSWR from "swr";
+import useSWR from "swr";
 
 export default function InputForm() {
   const { mutate } = useSWR(`/api/tasks/`);
@@ -15,11 +15,11 @@ export default function InputForm() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
+      mutate();
       if (!response.ok) {
         throw new Error("Error!");
       }
       event.target.reset();
-      mutate();
     } catch (error) {
       console.log("ERROR !!");
     }

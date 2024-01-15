@@ -3,9 +3,7 @@ import Head from "next/head";
 import { SWRConfig } from "swr";
 import { Heading } from "@chakra-ui/react";
 import { Inter } from "next/font/google";
-import { Link } from "@chakra-ui/next-js";
-import InputForm from "@/components/inputForm";
-import TaskList from "@/components/TaskList";
+
 import ListContainer from "@/components/ListContainer/ListContainer";
 
 const inter = Inter({ subsets: ["latin"] });
