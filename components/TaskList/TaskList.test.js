@@ -1,32 +1,63 @@
-import React from "react";
-import { render, screen, within } from "@testing-library/react";
-import { Checkbox, ListItem, UnorderedList } from "@chakra-ui/react";
+import TaskList from "./TaskList";
+import { render, screen, waitFor } from "@testing-library/react";
+import { SWRConfig } from "swr";
 
-const fruits = [
-  { id: 1, name: "Bananas" },
-  { id: 2, name: "Apples" },
-  { id: 3, name: "Strawberries" },
-  { id: 4, name: "Grapes" },
-  { id: 5, name: "Oranges" },
-];
-function FruitList() {
-  return (
-    <UnorderedList styleType="none" colorScheme="green.500" spacing={3}>
-      {fruits.map((fruit) => (
-        <ListItem key={fruit.id}>
-          <Checkbox>{fruit.name}</Checkbox>
-        </ListItem>
-      ))}
-    </UnorderedList>
-  );
-}
+// Mocking the useSWR hook
+jest.mock("swr");
 
-it("should render list of 5 fruits", () => {
-  render(<FruitList />);
-  const list = screen.getByRole("list", {
-    name: /fruits/i,
+describe("TaskList Component", () => {
+  it("renders loading state and then tasks", async () => {
+    const mockData = [
+      { _id: "1", title: "Task 1" },
+      { _id: "2", title: "Task 2" },
+    ];
+
+    // Mocking the useSWR response
+    useSWR.mockReturnValue({
+      data: mockData,
+      error: undefined,
+      isLoading: true,
+      mutate: jest.fn(),
+    });
+
+    render(
+      <SWRConfig value={{ dedupingInterval: 0 }}>
+        <TaskList />
+      </SWRConfig>
+    );
+
+    // Loading state should be displayed initially
+    expect(screen.getByText("Loading...")).toBeInTheDocument();
+    expect(screen.getByRole("status")).toBeInTheDocument();
+
+    // Wait for the loading state to disappear
+    await waitFor(() => {
+      expect(screen.queryByText("Loading...")).not.toBeInTheDocument();
+      expect(screen.queryByRole("status")).not.toBeInTheDocument();
+    });
+
+    // Tasks should be displayed
+    mockData.forEach((task) => {
+      expect(screen.getByText(task.title)).toBeInTheDocument();
+    });
   });
-  const { getAllByRole } = within(list);
-  const items = getAllByRole("listitem");
-  expect(items.length).toBe(5);
+
+  it("renders error state", async () => {
+    // Mocking the useSWR response with an error
+    useSWR.mockReturnValue({
+      data: undefined,
+      error: new Error("Failed to fetch"),
+      isLoading: false,
+      mutate: jest.fn(),
+    });
+
+    render(
+      <SWRConfig value={{ dedupingInterval: 0 }}>
+        <TaskList />
+      </SWRConfig>
+    );
+
+    // Error state should be displayed
+    expect(screen.getByText("failed to load")).toBeInTheDocument();
+  });
 });
