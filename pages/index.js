@@ -4,9 +4,15 @@ import { Heading, Spinner } from "@chakra-ui/react";
 import { SWRConfig } from "swr";
 import useSWR from "swr";
 import { useEffect } from "react";
-import { Heading } from "@chakra-ui/react";
+import { Heading, Menu } from "@chakra-ui/react";
 import ListContainer from "@/components/ListContainer/ListContainer";
+import { Inter } from "next/font/google";
+
 import { useTaskStore } from "@/store";
+import MenuContainer from "@/components/Navigation/MenuContainer";
+import { Grid, GridItem } from "@chakra-ui/react";
+
+const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   const fetcher = (url) => fetch(url).then((response) => response.json());
@@ -42,8 +48,26 @@ export default function Home() {
         <Head>
           <title>TaskTango</title>
         </Head>
-        <Heading p="6">Upcoming</Heading>
-        <ListContainer listTitle={listTitle} />
+        <Grid
+          h="100%"
+          templateRows="repeat(2, 1fr)"
+          templateColumns="repeat(6, 1fr)"
+          gap={4}
+        >
+          {" "}
+          <GridItem rowSpan={2} colSpan={2} bg="tomato">
+            <MenuContainer />
+          </GridItem>
+          <GridItem h="500px" rowSpan={1} colSpan={4} bg="papayawhip">
+            {/* how to fit this into this one Grid? */}
+            <div>
+              <Heading p="6">Upcoming</Heading>
+              <ListContainer listTitle={listTitle} />
+            </div>
+          </GridItem>
+          <GridItem rowSpan={2} colSpan={2} bg="blue"></GridItem>
+          <GridItem rowSpan={2} colSpan={2} bg="green"></GridItem>
+        </Grid>
       </SWRConfig>
     </>
   );

@@ -1,12 +1,12 @@
 import { Input, InputLeftElement, InputGroup } from "@chakra-ui/react";
-import { SearchIcon } from "@chakra-ui/icons";
+import { Search2Icon } from "@chakra-ui/icons";
 
 export default function Search() {
   return (
     <form>
       <InputGroup>
         <InputLeftElement pointerEvents="none">
-          <SearchIcon color="gray.300" />
+          <Search2Icon color="gray.00" />
         </InputLeftElement>
         <Input id="search" name="search" type="text" placeholder="Search" />
       </InputGroup>
