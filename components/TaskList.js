@@ -1,8 +1,10 @@
 import useSWR from "swr";
+
 import { Checkbox, ListItem, Spinner, UnorderedList } from "@chakra-ui/react";
 
 export default function TaskList() {
-  const { data, isLoading, error } = useSWR("/api/tasks");
+  const { data, isLoading, error, mutate } = useSWR("/api/tasks");
+
   console.log(data);
 
   if (isLoading) {
@@ -17,6 +19,7 @@ export default function TaskList() {
   if (error) {
     return <div>failed to load</div>;
   }
+  mutate();
 
   if (!data) {
     return;
