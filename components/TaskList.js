@@ -1,30 +1,10 @@
-import useSWR from "swr";
-import { Checkbox, ListItem, Spinner, UnorderedList } from "@chakra-ui/react";
+import { Checkbox, ListItem, UnorderedList } from "@chakra-ui/react";
 
-export default function TaskList() {
-  const { data, isLoading, error } = useSWR("/api/tasks");
-  console.log(data);
-
-  if (isLoading) {
-    return (
-      <>
-        <h1>Loading...</h1>
-        <Spinner size="xl" />
-      </>
-    );
-  }
-
-  if (error) {
-    return <div>failed to load</div>;
-  }
-
-  if (!data) {
-    return;
-  }
-
+export default function TaskList({tasks}) {
+ 
   return (
     <UnorderedList styleType="none" colorScheme="green.500" spacing={3}>
-      {data.map((task) => (
+      {tasks.map((task) => (
         <ListItem key={task._id}>
           <Checkbox key={task._id} href={`/${task._id}`}>
             {task.title}
