@@ -4,6 +4,7 @@ import { Heading, Spinner } from "@chakra-ui/react";
 import { SWRConfig } from "swr";
 import useSWR from "swr";
 import { useEffect } from "react";
+import { Heading } from "@chakra-ui/react";
 import ListContainer from "@/components/ListContainer/ListContainer";
 import { useTaskStore } from "@/store";
 
@@ -14,8 +15,11 @@ export default function Home() {
 
   const { data: swrData, error: swrError } = useSWR("/api/tasks", fetcher);
 
-  useEffect(() => { if (swrData) { setData(swrData); }
-}, [swrData, setData]);
+  useEffect(() => {
+    if (swrData) {
+      setData(swrData);
+    }
+  }, [swrData, setData]);
 
   if (swrError) {
     return <div>Failed to load</div>;
@@ -29,8 +33,6 @@ export default function Home() {
       </>
     );
   }
-
-  
 
   const listTitle = "Today";
 
