@@ -1,7 +1,7 @@
 import { Container, Heading, Box, Spinner } from "@chakra-ui/react";
 import InputForm from "../InputForm/InputForm";
-import TaskList from "../TaskList";
 import useSWR from "swr";
+import TaskList from "../TaskList/TaskList";
 
 export default function ListContainer({ listTitle }) {
   const { data, isLoading, error } = useSWR("/api/tasks");
