@@ -5,7 +5,8 @@ import useSWR from "swr";
 export default function InputForm() {
   const { mutate } = useSWR(`/api/tasks/`);
   async function handleSubmit(event) {
-    event.preventDefault();
+    //comment this because the mutate is taking about 1min and this will automatically refresh the form
+    // event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
     console.log(data);

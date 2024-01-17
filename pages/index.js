@@ -41,7 +41,6 @@ export default function Home() {
           <title>TaskTango</title>
         </Head>
         <Heading p="6">Upcoming</Heading>
-
         <ListContainer listTitle={listTitle} />
       </SWRConfig>
     </>
