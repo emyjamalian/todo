@@ -3,7 +3,7 @@ import { useTaskStore } from "@/store";
 
 export default function TaskList() {
   const { data: tasks } = useTaskStore();
-
+  console.log("DEBUG LIST: ", tasks);
   return (
     <UnorderedList styleType="none" colorScheme="green.500" spacing={3}>
       {tasks.map((task) => (
