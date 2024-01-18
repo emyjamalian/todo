@@ -46,12 +46,8 @@ export default function Home() {
           <title>TaskTango</title>
         </Head>
         <Flex margin="8" gap="8" color="white">
-          <Box bg="gray.200" maxWidth="346px" borderRadius="50px">
-            <MenuContainer />
-          </Box>
-          <Box flex="1">
-            <MainContainer mainTitle={"Upcoming"}> </MainContainer>
-          </Box>
+          <MenuContainer />
+          <MainContainer mainTitle={"Upcoming"} flex="1"></MainContainer>
         </Flex>
       </SWRConfig>
     </>
