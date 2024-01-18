@@ -2,11 +2,8 @@ import { Checkbox, ListItem, UnorderedList } from "@chakra-ui/react";
 import { useTaskStore } from "@/store";
 
 export default function TaskList() {
- 
-  const {data} = useTaskStore()
+  const { data: tasks } = useTaskStore();
 
-export default function TaskList({tasks}) {
- 
   return (
     <UnorderedList styleType="none" colorScheme="green.500" spacing={3}>
       {tasks.map((task) => (
