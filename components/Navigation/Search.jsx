@@ -6,9 +6,18 @@ export default function Search() {
     <form>
       <InputGroup>
         <InputLeftElement pointerEvents="none">
-          <Search2Icon color="gray.00" />
+          <Search2Icon color="black" />
         </InputLeftElement>
-        <Input id="search" name="search" type="text" placeholder="Search" />
+        <Input
+          id="search"
+          name="search"
+          type="text"
+          placeholder="Search..."
+          color="black"
+          bg="gray.200"
+          borderRadius="full"
+          width="auto"
+        />
       </InputGroup>
     </form>
   );

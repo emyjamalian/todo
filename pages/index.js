@@ -10,7 +10,8 @@ import { Inter } from "next/font/google";
 
 import { useTaskStore } from "@/store";
 import MenuContainer from "@/components/Navigation/MenuContainer";
-import { Grid, GridItem } from "@chakra-ui/react";
+import { Grid, GridItem, Box, Text, Flex, Square } from "@chakra-ui/react";
+import MainContainer from "@/components/Navigation/mainContainer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -48,26 +49,14 @@ export default function Home() {
         <Head>
           <title>TaskTango</title>
         </Head>
-        <Grid
-          h="100%"
-          templateRows="repeat(2, 1fr)"
-          templateColumns="repeat(6, 1fr)"
-          gap={4}
-        >
-          {" "}
-          <GridItem rowSpan={2} colSpan={2} bg="tomato">
+        <Flex margin="8" gap="8" color="white">
+          <Box bg="gray.200" maxWidth="346px" borderRadius="50px">
             <MenuContainer />
-          </GridItem>
-          <GridItem h="500px" rowSpan={1} colSpan={4} bg="papayawhip">
-            {/* how to fit this into this one Grid? */}
-            <div>
-              <Heading p="6">Upcoming</Heading>
-              <ListContainer listTitle={listTitle} />
-            </div>
-          </GridItem>
-          <GridItem rowSpan={2} colSpan={2} bg="blue"></GridItem>
-          <GridItem rowSpan={2} colSpan={2} bg="green"></GridItem>
-        </Grid>
+          </Box>
+          <Box flex="1">
+            <MainContainer mainTitle={"Upcoming"}> </MainContainer>
+          </Box>
+        </Flex>
       </SWRConfig>
     </>
   );

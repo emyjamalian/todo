@@ -4,29 +4,40 @@ import {
   CopyIcon,
   TimeIcon,
 } from "@chakra-ui/icons";
-import { List, ListItem, ListIcon, Card } from "@chakra-ui/react";
+import { List, ListItem, ListIcon, Box, Heading } from "@chakra-ui/react";
 
 export default function TasksSection() {
   return (
-    <Card>
-      <List spacing={3}>
-        <ListItem>
-          <ListIcon as={ArrowRightIcon} color="grey.500" />
-          Upcoming
-        </ListItem>
-        <ListItem>
-          <ListIcon as={TimeIcon} color="grey.500" />
-          Today
-        </ListItem>
-        <ListItem>
-          <ListIcon as={CalendarIcon} color="grey.500" />
-          Calendar
-        </ListItem>
-        <ListItem>
-          <ListIcon as={CopyIcon} color="grey.500" />
-          Sticky Wall
-        </ListItem>
-      </List>
-    </Card>
+    <>
+      <Heading color="black" paddingTop="5" size="sm" mb={5} noOfLines={1}>
+        {"Tasks"}
+      </Heading>
+      <Box
+        color="gray.800"
+        overflow="hidden"
+        lineHeight="tight"
+        fontSize="sm"
+        marginBottom="15"
+      >
+        <List spacing={3}>
+          <ListItem>
+            <ListIcon as={ArrowRightIcon} />
+            Upcoming
+          </ListItem>
+          <ListItem>
+            <ListIcon as={TimeIcon} />
+            Today
+          </ListItem>
+          <ListItem>
+            <ListIcon as={CalendarIcon} />
+            Calendar
+          </ListItem>
+          <ListItem>
+            <ListIcon as={CopyIcon} />
+            Sticky Wall
+          </ListItem>
+        </List>
+      </Box>
+    </>
   );
 }
