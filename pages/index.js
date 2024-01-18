@@ -1,16 +1,12 @@
 "use client";
 import Head from "next/head";
-import { Heading, Spinner } from "@chakra-ui/react";
 import { SWRConfig } from "swr";
 import useSWR from "swr";
 import { useEffect } from "react";
-import { Heading, Menu } from "@chakra-ui/react";
-import ListContainer from "@/components/ListContainer/ListContainer";
 import { Inter } from "next/font/google";
-
 import { useTaskStore } from "@/store";
 import MenuContainer from "@/components/Navigation/MenuContainer";
-import { Grid, GridItem, Box, Text, Flex, Square } from "@chakra-ui/react";
+import { Box, Flex, Spinner } from "@chakra-ui/react";
 import MainContainer from "@/components/Navigation/mainContainer";
 
 const inter = Inter({ subsets: ["latin"] });
