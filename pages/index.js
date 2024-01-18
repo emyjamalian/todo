@@ -1,11 +1,15 @@
 "use client";
 import Head from "next/head";
-import { Heading, Spinner } from "@chakra-ui/react";
 import { SWRConfig } from "swr";
 import useSWR from "swr";
 import { useEffect } from "react";
-import ListContainer from "@/components/ListContainer/ListContainer";
+import { Inter } from "next/font/google";
 import { useTaskStore } from "@/store";
+import MenuContainer from "@/components/Navigation/MenuContainer";
+import { Box, Flex, Spinner } from "@chakra-ui/react";
+import MainContainer from "@/components/Navigation/mainContainer";
+
+const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   const fetcher = (url) => fetch(url).then((response) => response.json());
@@ -14,8 +18,11 @@ export default function Home() {
 
   const { data: swrData, error: swrError } = useSWR("/api/tasks", fetcher);
 
-  useEffect(() => { if (swrData) { setData(swrData); }
-}, [swrData, setData]);
+  useEffect(() => {
+    if (swrData) {
+      setData(swrData);
+    }
+  }, [swrData, setData]);
 
   if (swrError) {
     return <div>Failed to load</div>;
@@ -30,8 +37,6 @@ export default function Home() {
     );
   }
 
-  
-
   const listTitle = "Today";
 
   return (
@@ -40,8 +45,14 @@ export default function Home() {
         <Head>
           <title>TaskTango</title>
         </Head>
-        <Heading p="6">Upcoming</Heading>
-        <ListContainer listTitle={listTitle} />
+        <Flex margin="8" gap="8" color="white">
+          <Box bg="gray.200" maxWidth="346px" borderRadius="50px">
+            <MenuContainer />
+          </Box>
+          <Box flex="1">
+            <MainContainer mainTitle={"Upcoming"}> </MainContainer>
+          </Box>
+        </Flex>
       </SWRConfig>
     </>
   );
