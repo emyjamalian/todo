@@ -1,29 +1,10 @@
-import useSWR from "swr";
 
+import { useTaskStore } from "@/store";
 import { Checkbox, ListItem, Spinner, UnorderedList } from "@chakra-ui/react";
 
 export default function TaskList() {
-  const { data, isLoading, error, mutate } = useSWR("/api/tasks");
-
-  console.log(data);
-
-  if (isLoading) {
-    return (
-      <>
-        <h1>Loading...</h1>
-        <Spinner size="xl" />
-      </>
-    );
-  }
-
-  if (error) {
-    return <div>failed to load</div>;
-  }
-  mutate();
-
-  if (!data) {
-    return;
-  }
+ 
+  const {data} = useTaskStore()
 
   return (
     <UnorderedList styleType="none" colorScheme="green.500" spacing={3}>
