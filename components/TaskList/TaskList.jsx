@@ -6,6 +6,7 @@ import {
   Spacer,
   Divider,
   Flex,
+  useToast,
 } from "@chakra-ui/react";
 import { useTaskStore } from "@/store";
 import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
@@ -15,14 +16,32 @@ import useSWR from "swr";
 export default function TaskList() {
   const { data: tasks } = useTaskStore();
   const { mutate } = useSWR("/api/tasks/");
+  const toast = useToast();
 
   const handleDeleteTask = async (taskId) => {
-    deleteTask(taskId);
+    deleteTask(taskId)
+      .then(() => {
+        toast({
+          title: "Task deleted",
+          status: "warning",
+          duration: 5000, // Duration in milliseconds
+          isClosable: true,
+        });
+      })
+      .catch((error) => {
+        toast({
+          title: "Error deleting task",
+          description: error.message,
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+      });
     mutate();
   };
 
   return (
-    <UnorderedList styleType="none" spacing={5}>
+    <UnorderedList styleType="none" spacing={5} marginTop={5}>
       {tasks.map((task) => (
         <ListItem key={task._id} w="100%">
           <Flex>

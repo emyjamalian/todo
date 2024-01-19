@@ -6,7 +6,7 @@ export default function InputForm() {
   const { mutate } = useSWR(`/api/tasks/`);
   async function handleSubmit(event) {
     //comment this because the mutate is taking about 1min and this will automatically refresh the form
-    // event.preventDefault();
+    event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
     console.log(data);
@@ -16,6 +16,7 @@ export default function InputForm() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
+
       mutate();
 
       event.target.reset();
