@@ -5,7 +5,6 @@ import TaskList from "../TaskList/TaskList";
 
 export default function ListContainer({ listTitle }) {
   const { data, isLoading, error } = useSWR("/api/tasks");
-  console.log(data);
 
   if (isLoading) {
     return (

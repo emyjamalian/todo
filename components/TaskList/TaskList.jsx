@@ -9,10 +9,18 @@ import {
 } from "@chakra-ui/react";
 import { useTaskStore } from "@/store";
 import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
+import { deleteTask } from "../Task/functions/deleteTask";
+import useSWR from "swr";
 
 export default function TaskList() {
   const { data: tasks } = useTaskStore();
-  console.log("DEBUG LIST: ", tasks);
+  const { mutate } = useSWR("/api/tasks/");
+
+  const handleDeleteTask = async (taskId) => {
+    deleteTask(taskId);
+    mutate();
+  };
+
   return (
     <UnorderedList styleType="none" spacing={5}>
       {tasks.map((task) => (
@@ -25,13 +33,15 @@ export default function TaskList() {
             <IconButton
               aria-label="Delete a task"
               size="xs"
-              margin="0 5px "
+              margin="0 5px 5px 0"
               icon={<EditIcon />}
             />
             <IconButton
               aria-label="Delete a task"
               size="xs"
+              color="red.300"
               icon={<DeleteIcon />}
+              onClick={() => handleDeleteTask(task._id)}
             />
           </Flex>
           <Divider />
