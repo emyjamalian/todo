@@ -1,5 +1,5 @@
 import { Container, Heading, Box, Spinner } from "@chakra-ui/react";
-import InputForm from "../InputForm/InputForm";
+import InputForm from "../Task/AddTaskInput";
 import useSWR from "swr";
 import TaskList from "../TaskList/TaskList";
 

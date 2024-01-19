@@ -1,5 +1,5 @@
 import { Container, Heading, Box } from "@chakra-ui/react";
-import ListContainer from "../ListContainer/ListContainer";
+import ListContainer from "../TaskListContainer/TaskListContainer";
 
 export default function MainContainer({ mainTitle }) {
   return (

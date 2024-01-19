@@ -1,6 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
-import InputForm from "./InputForm";
+import InputForm from "./AddTaskInput";
 
 test("renders an input field with an addIcon", () => {
   render(<InputForm />);
