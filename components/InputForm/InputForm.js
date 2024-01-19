@@ -1,29 +1,30 @@
 import { Input, InputLeftElement, InputGroup } from "@chakra-ui/react";
 import { AddIcon } from "@chakra-ui/icons";
-import useSWR from "swr";
+import { useTaskStore } from "@/store";
 
 export default function InputForm() {
-  const { mutate } = useSWR(`/api/tasks/`);
+  const { addTask } = useTaskStore();
   async function handleSubmit(event) {
     //comment this because the mutate is taking about 1min and this will automatically refresh the form
-    // event.preventDefault();
+    event.preventDefault();
     const formData = new FormData(event.target);
-    const data = Object.fromEntries(formData);
-    console.log(data);
+    const task = Object.fromEntries(formData);
+    console.log("DEBUG TASK: ", task);
     try {
       const response = await fetch(`/api/tasks/`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        body: JSON.stringify(task),
       });
-      mutate();
       if (!response.ok) {
         throw new Error("Error!");
       }
-      event.target.reset();
+      addTask(await response.json());
     } catch (error) {
-      console.log("ERROR !!");
+      console.log("ERROR !!", error);
     }
+
+    event.target.reset();
   }
 
   return (

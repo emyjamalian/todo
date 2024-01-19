@@ -14,10 +14,14 @@ const inter = Inter({ subsets: ["latin"] });
 export default function Home() {
   const fetcher = (url) => fetch(url).then((response) => response.json());
 
-  const { setData, isLoading, error } = useTaskStore();
+  const { data: tasks, setData, isLoading, error } = useTaskStore();
 
-  const { data: swrData, error: swrError } = useSWR("/api/tasks", fetcher);
-
+  const {
+    data: swrData,
+    error: swrError,
+    mutate: mutate,
+  } = useSWR("/api/tasks", fetcher);
+  console.log("DEBUG SWRDATA: ", swrData);
   useEffect(() => {
     if (swrData) {
       setData(swrData);
@@ -37,11 +41,9 @@ export default function Home() {
     );
   }
 
-  const listTitle = "Today";
-
   return (
     <>
-      <SWRConfig value={{ fetcher }}>
+      <SWRConfig>
         <Head>
           <title>TaskTango</title>
         </Head>
