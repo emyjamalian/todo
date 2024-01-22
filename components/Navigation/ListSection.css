@@ -1,0 +1,5 @@
+/* Added active state styles */
+.menu-item.active {
+  color: teal.400;
+  font-weight: bold;
+}

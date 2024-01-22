@@ -1,17 +1,5 @@
-import {
-  ArrowRightIcon,
-  PlusSquareIcon,
-  CheckCircleIcon,
-  CopyIcon,
-} from "@chakra-ui/icons";
-import {
-  List,
-  ListItem,
-  ListIcon,
-  Box,
-  Heading,
-  Spacer,
-} from "@chakra-ui/react";
+import { ArrowRightIcon, CheckCircleIcon, CopyIcon } from "@chakra-ui/icons";
+import { List, ListItem, ListIcon, Box, Heading } from "@chakra-ui/react";
 
 export default function ListsSection() {
   return (
@@ -26,20 +14,28 @@ export default function ListsSection() {
         fontSize="sm"
         marginBottom="15"
       >
-        <List spacing={3}>
-          <ListItem>
-            <ListIcon as={ArrowRightIcon} />
-            Upcoming
-          </ListItem>
-          <ListItem>
-            <ListIcon as={CheckCircleIcon} />
-            Done
-          </ListItem>
-          <ListItem>
-            <ListIcon as={CopyIcon} />
-            Sticky Wall
-          </ListItem>
-        </List>
+        <nav>
+          <List spacing={5}>
+            <ListItem class="menu-item">
+              <Box as="a" href="/">
+                <ListIcon as={ArrowRightIcon} />
+                Upcoming
+              </Box>
+            </ListItem>
+            <ListItem class="menu-item">
+              <Box as="a" href="/done">
+                <ListIcon as={CheckCircleIcon} />
+                Done
+              </Box>
+            </ListItem>
+            <ListItem class="menu-item">
+              <Box as="a" href="/stickywall">
+                <ListIcon as={CopyIcon} />
+                Sticky Wall
+              </Box>
+            </ListItem>
+          </List>
+        </nav>
       </Box>
     </>
   );
