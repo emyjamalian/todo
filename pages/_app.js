@@ -8,13 +8,13 @@ const fetcher = (url) => fetch(url).then((response) => response.json());
 export default function App({ Component, pageProps }) {
   return (
     <>
-      {/* <style jsx global>
+      <style jsx global>
         {`
           :root {
             --font-rubik: ${fonts.rubik.style.fontFamily};
           }
         `}
-      </style> */}
+      </style>
       <ChakraProvider>
         <SWRConfig value={{ fetcher }}>
           <Component {...pageProps} />
