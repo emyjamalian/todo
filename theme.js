@@ -4,7 +4,7 @@ import { extendTheme } from "@chakra-ui/react";
 export const theme = extendTheme({
   config: {
     cssVarPrefix: "ck",
-    initialColorMode: "dark",
+    initialColorMode: "light",
     useSystemColorMode: true,
   },
   colors: {
