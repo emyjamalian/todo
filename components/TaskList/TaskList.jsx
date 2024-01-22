@@ -84,16 +84,17 @@ export default function TaskList({ tasks }) {
               {task.title}
             </Checkbox>
             <Spacer />
-            <IconButton
+            {/* <IconButton
               aria-label="Delete a task"
               size="xs"
               margin="0 5px 5px 0"
               icon={<EditIcon />}
-            />
+            /> */}
             <IconButton
               aria-label="Delete a task"
               size="xs"
               color="red.300"
+              margin="0 5px 5px 0"
               icon={<DeleteIcon />}
               onClick={() => handleDeleteTask(task._id)}
             />
