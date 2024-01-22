@@ -1,7 +1,7 @@
-import { Container, Heading, Box, Menu } from "@chakra-ui/react";
+import { Container, Heading, Box, Menu, Spacer } from "@chakra-ui/react";
 import Search from "./Search";
-import TasksSection from "./TasksSection";
 import ListsSection from "./ListsSection";
+import DarkMode from "./DarkMode";
 
 export default function MenuContainer() {
   return (
@@ -12,9 +12,10 @@ export default function MenuContainer() {
           <Menu></Menu>
         </Heading>
         <Search />
-        <TasksSection />
         <ListsSection />
       </Container>
+      <Spacer />
+      <DarkMode />
     </Box>
   );
 }

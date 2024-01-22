@@ -1,5 +1,17 @@
-import { MinusIcon, PlusSquareIcon } from "@chakra-ui/icons";
-import { List, ListItem, ListIcon, Heading, Box } from "@chakra-ui/react";
+import {
+  ArrowRightIcon,
+  PlusSquareIcon,
+  CheckCircleIcon,
+  CopyIcon,
+} from "@chakra-ui/icons";
+import {
+  List,
+  ListItem,
+  ListIcon,
+  Box,
+  Heading,
+  Spacer,
+} from "@chakra-ui/react";
 
 export default function ListsSection() {
   return (
@@ -15,21 +27,17 @@ export default function ListsSection() {
         marginBottom="15"
       >
         <List spacing={3}>
-          <ListItem borderRadius="full">
-            <ListIcon as={MinusIcon} />
-            Work
+          <ListItem>
+            <ListIcon as={ArrowRightIcon} />
+            Upcoming
           </ListItem>
           <ListItem>
-            <ListIcon as={MinusIcon} />
-            Personal
+            <ListIcon as={CheckCircleIcon} />
+            Done
           </ListItem>
           <ListItem>
-            <ListIcon as={MinusIcon} />
-            Study
-          </ListItem>
-          <ListItem>
-            <ListIcon as={PlusSquareIcon} />
-            Add New List
+            <ListIcon as={CopyIcon} />
+            Sticky Wall
           </ListItem>
         </List>
       </Box>
