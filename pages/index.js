@@ -1,46 +1,11 @@
 "use client";
 import Head from "next/head";
 import { SWRConfig } from "swr";
-import useSWR from "swr";
-import { useEffect } from "react";
-import { Inter } from "next/font/google";
-import { useTaskStore } from "@/store";
 import MenuContainer from "@/components/Navigation/MenuContainer";
-import { Box, Flex, Spinner } from "@chakra-ui/react";
+import { Flex, Spinner } from "@chakra-ui/react";
 import MainContainer from "@/components/Navigation/mainContainer";
 
-const inter = Inter({ subsets: ["latin"] });
-
 export default function Home() {
-  const fetcher = (url) => fetch(url).then((response) => response.json());
-
-  const { data: tasks, setData, isLoading, error } = useTaskStore();
-
-  const {
-    data: swrData,
-    error: swrError,
-    mutate: mutate,
-  } = useSWR("/api/tasks", fetcher);
-  console.log("DEBUG SWRDATA: ", swrData);
-  useEffect(() => {
-    if (swrData) {
-      setData(swrData);
-    }
-  }, [swrData, setData]);
-
-  if (swrError) {
-    return <div>Failed to load</div>;
-  }
-
-  if (isLoading || !swrData) {
-    return (
-      <>
-        <h1>Loading...</h1>
-        <Spinner size="xl" />
-      </>
-    );
-  }
-
   return (
     <>
       <SWRConfig>

@@ -3,8 +3,10 @@ import InputForm from "../Task/AddTaskInput";
 import useSWR from "swr";
 import TaskList from "../TaskList/TaskList";
 
-export default function ListContainer({ listTitle }) {
-  const { data, isLoading, error } = useSWR("/api/tasks");
+export default function TaskListContainer({ listTitle }) {
+  const { data: tasks, isLoading, error } = useSWR("/api/tasks");
+
+  console.log("tasklist container tasks", tasks);
 
   if (isLoading) {
     return (
@@ -19,7 +21,7 @@ export default function ListContainer({ listTitle }) {
     return <div>failed to load</div>;
   }
 
-  if (!data) {
+  if (!tasks) {
     return;
   }
 
@@ -30,7 +32,7 @@ export default function ListContainer({ listTitle }) {
           {listTitle}
         </Heading>
         <InputForm />
-        <TaskList tasks={data} />
+        <TaskList tasks={tasks} />
       </Container>
     </Box>
   );

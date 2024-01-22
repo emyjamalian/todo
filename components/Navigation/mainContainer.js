@@ -1,5 +1,5 @@
 import { Container, Heading, Box } from "@chakra-ui/react";
-import ListContainer from "../TaskListContainer/TaskListContainer";
+import TaskListContainer from "../TaskListContainer/TaskListContainer";
 
 export default function MainContainer({ mainTitle }) {
   return (
@@ -15,7 +15,7 @@ export default function MainContainer({ mainTitle }) {
         <Heading paddingbottom="5" as="h3" size="3xl" mb={5} noOfLines={1}>
           {mainTitle}
         </Heading>
-        <ListContainer />
+        <TaskListContainer listTitle="Today" />
       </Container>
     </Box>
   );

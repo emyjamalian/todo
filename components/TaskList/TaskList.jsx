@@ -8,14 +8,10 @@ import {
   Flex,
   useToast,
 } from "@chakra-ui/react";
-import { useTaskStore } from "@/store";
 import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import { deleteTask } from "../Task/functions/deleteTask";
-import useSWR from "swr";
 
-export default function TaskList() {
-  const { data: tasks } = useTaskStore();
-  const { mutate } = useSWR("/api/tasks/");
+export default function TaskList({ tasks }) {
   const toast = useToast();
 
   const handleDeleteTask = async (taskId) => {
@@ -39,6 +35,7 @@ export default function TaskList() {
       });
     mutate();
   };
+  console.log("tasklist tasks", tasks);
 
   return (
     <UnorderedList styleType="none" spacing={5} marginTop={5}>
