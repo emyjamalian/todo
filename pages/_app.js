@@ -1,5 +1,5 @@
 import "@/styles/globals.css";
-import { ChakraProvider } from "@chakra-ui/react";
+import { ChakraProvider, theme, ColorModeScript } from "@chakra-ui/react";
 import { fonts } from "../lib/fonts";
 import { SWRConfig } from "swr";
 
@@ -15,7 +15,7 @@ export default function App({ Component, pageProps }) {
           }
         `}
       </style>
-      <ChakraProvider>
+      <ChakraProvider theme={theme}>
         <SWRConfig value={{ fetcher }}>
           <Component {...pageProps} />
         </SWRConfig>

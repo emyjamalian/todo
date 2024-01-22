@@ -16,19 +16,19 @@ export default function ListsSection() {
       >
         <nav>
           <List spacing={5}>
-            <ListItem class="menu-item">
+            <ListItem className="menu-item">
               <Box as="a" href="/">
                 <ListIcon as={ArrowRightIcon} />
                 Upcoming
               </Box>
             </ListItem>
-            <ListItem class="menu-item">
+            <ListItem className="menu-item">
               <Box as="a" href="/done">
                 <ListIcon as={CheckCircleIcon} />
                 Done
               </Box>
             </ListItem>
-            <ListItem class="menu-item">
+            <ListItem className="menu-item">
               <Box as="a" href="/stickywall">
                 <ListIcon as={CopyIcon} />
                 Sticky Wall
