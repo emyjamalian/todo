@@ -78,7 +78,7 @@ export default function TaskList({ tasks }) {
             <Checkbox
               key={task._id}
               // href={`/${task._id}`}
-
+              isChecked={task.completed}
               onChange={() => handleCompletedTask(task._id)}
             >
               {task.title}
