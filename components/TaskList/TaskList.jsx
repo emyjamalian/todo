@@ -8,14 +8,12 @@ import {
   Flex,
   useToast,
 } from "@chakra-ui/react";
-import { useTaskStore } from "@/store";
 import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import { deleteTask } from "../Task/functions/deleteTask";
 import useSWR from "swr";
 
 export default function TaskList() {
-  const { data: tasks } = useTaskStore();
-  const { mutate } = useSWR("/api/tasks/");
+  const { data: tasks, mutate } = useSWR("/api/tasks/");
   const toast = useToast();
 
   const handleDeleteTask = async (taskId) => {
