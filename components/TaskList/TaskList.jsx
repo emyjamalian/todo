@@ -11,55 +11,89 @@ import {
 import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import { deleteTask } from "../Task/functions/deleteTask";
 import { completedTask } from "../Task/functions/completedTask";
-import useSWR from "swr";
+import { useSWRConfig } from "swr";
 
 export default function TaskList({ tasks }) {
   const toast = useToast();
-  const { mutate } = useSWR("/api/tasks");
+  const { mutate } = useSWRConfig();
 
   const handleDeleteTask = async (taskId) => {
-    deleteTask(taskId)
-      .then(() => {
-        toast({
-          title: "Task deleted",
-          status: "warning",
-          duration: 5000, // Duration in milliseconds
-          isClosable: true,
-        });
-      })
-      .catch((error) => {
-        toast({
-          title: "Error deleting task",
-          description: error.message,
-          status: "error",
-          duration: 5000,
-          isClosable: true,
-        });
-      });
-    mutate();
-  };
+    try {
+      // Optimistic Update
+      mutate(
+        "/api/tasks",
+        (data) => {
+          return data.filter((task) => task._id !== taskId);
+        },
+        false
+      );
 
-  const handleCompletedTask = async (taskID) => {
-    //add it to localstorage
-    completedTask(taskID)
-      .then(() => {
-        toast({
-          title: "Task Done",
-          status: "success",
-          duration: 5000, // Duration in milliseconds
-          isClosable: true,
-        });
-      })
-      .catch((error) => {
-        toast({
-          title: "Error deleting task",
-          description: error.message,
-          status: "error",
-          duration: 5000,
-          isClosable: true,
-        });
+      await deleteTask(taskId);
+
+      // Successful delete
+      toast({
+        title: "Task deleted",
+        status: "warning",
+        duration: 5000,
+        isClosable: true,
       });
-    mutate();
+
+      // Revalidate after successful operation
+      mutate("/api/tasks");
+    } catch (error) {
+      // Revert to the previous data on error
+      mutate("/api/tasks");
+      toast({
+        title: "Error deleting task",
+        description: error.message,
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
+    }
+  };
+  const handleCompletedTask = async (taskID) => {
+    try {
+      // Optimistic Update
+      mutate(
+        "/api/tasks",
+        (data) => {
+          return data.map((task) => {
+            if (task._id === taskID) {
+              return { ...task, completed: true };
+            }
+            return task;
+          });
+        },
+        true
+      );
+
+      // Mark task as completed
+      await completedTask(taskID);
+
+      // Revalidate after successful operation
+      mutate("/api/tasks");
+
+      // Show success toast
+      toast({
+        title: "Task Done",
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+      });
+    } catch (error) {
+      // Revert to the previous data on error
+      mutate("/api/tasks");
+
+      // Show error toast
+      toast({
+        title: "Error completing task",
+        description: error.message,
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
+    }
   };
 
   // const handleEditTask = async (event) => {
