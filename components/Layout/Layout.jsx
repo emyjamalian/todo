@@ -3,7 +3,7 @@ import { SWRConfig } from "swr";
 import Head from "next/head";
 import MenuContainer from "../Navigation/MenuContainer";
 import { ColorModeScript } from "@chakra-ui/react";
-import { theme } from "../theme";
+import { theme } from "../../theme";
 
 const Layout = ({ children, title }) => {
   return (
