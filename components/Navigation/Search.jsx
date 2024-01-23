@@ -13,8 +13,9 @@ export default function Search() {
           name="search"
           type="text"
           placeholder="Search..."
-          color="black"
-          bg="gray.200"
+          _placeholder={{ opacity: 1, color: "gray.500" }}
+          // color="black"
+          bg="gray.100"
           borderRadius="full"
           width="auto"
         />
