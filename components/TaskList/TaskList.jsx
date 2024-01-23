@@ -18,7 +18,7 @@ import { editTask } from "../Task/functions/editTask";
 import { completedTask } from "../Task/functions/completedTask";
 import { useSWRConfig } from "swr";
 
-export default function TaskList({ listTitle, tasks }) {
+export default function TaskList({ tasks }) {
   const toast = useToast();
   const { mutate } = useSWRConfig();
 

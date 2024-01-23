@@ -10,9 +10,7 @@ const UpcomingPage = () => {
     data: upcomingTasks,
     isLoading,
     error,
-  } = useSWR("/api/status/upcoming");
-
-  console.log("upcoming tasks", upcomingTasks);
+  } = useSWR("/api/tasks", async () => (await fetch("/api/status/upcoming")).json());
 
   if (isLoading) {
     return (
