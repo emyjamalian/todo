@@ -8,6 +8,9 @@ const DonePage = () => {
   const { data: doneTasks, isLoading, error } = useSWR("/api/status/done");
 
   console.log("done tasks", doneTasks);
+  if (!doneTasks) {
+    return;
+  }
 
   if (isLoading) {
     return (
@@ -20,10 +23,6 @@ const DonePage = () => {
 
   if (error) {
     return <div>failed to load</div>;
-  }
-
-  if (!doneTasks) {
-    return;
   }
 
   return (
