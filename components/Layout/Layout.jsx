@@ -8,12 +8,12 @@ import { theme } from "../../theme";
 const Layout = ({ children, title }) => {
   return (
     <>
-      <ColorModeScript initialColorMode={theme.config.initialColorMode} />
       <SWRConfig>
         <Head>
           <title>{title || "TaskTango"}</title>
         </Head>
-        <div style={{ display: "flex", margin: 8, gap: 8, color: "white" }}>
+        <ColorModeScript initialColorMode={theme.config.initialColorMode} />
+        <div style={{ display: "flex", margin: 8, gap: 8 }}>
           <MenuContainer />
           {children}
         </div>

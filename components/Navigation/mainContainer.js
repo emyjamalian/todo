@@ -1,7 +1,5 @@
 import React from "react";
-import { Container, Heading, Box, useColorModeValue } from "@chakra-ui/react";
-import TaskListContainer from "../TaskListContainer/TaskListContainer";
-import DarkMode from "./DarkMode";
+import { Container, Heading, Box } from "@chakra-ui/react";
 
 export default function MainContainer({ mainTitle, children }) {
   return (
