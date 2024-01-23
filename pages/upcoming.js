@@ -1,6 +1,7 @@
-import React from "react";
+"use client";
 import Layout from "@/components/Layout/Layout";
 import MainContainer from "@/components/Navigation/mainContainer";
+import TaskList from "@/components/TaskList/TaskList";
 import useSWR from "swr";
 import { Spinner } from "@chakra-ui/react";
 
@@ -23,6 +24,7 @@ const UpcomingPage = () => {
   }
 
   if (error) {
+    console.error(error);
     return <div>failed to load</div>;
   }
 

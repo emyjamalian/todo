@@ -1,9 +1,6 @@
 "use client";
-import Head from "next/head";
-import { Flex, Spinner } from "@chakra-ui/react";
+import { Spinner } from "@chakra-ui/react";
 import MainContainer from "@/components/Navigation/mainContainer";
-import { theme } from "../theme";
-
 import React from "react";
 import Layout from "@/components/Layout/Layout";
 import InputForm from "@/components/Task/AddTaskInput";
@@ -32,7 +29,6 @@ const IndexPage = () => {
     return;
   }
 
-
   return (
     <Layout title="TaskTango - Home Page">
       <MainContainer mainTitle="Add a new task" flex="1">
@@ -40,8 +36,6 @@ const IndexPage = () => {
         <TaskList tasks={tasks} />
       </MainContainer>
     </Layout>
-
-
   );
 };
 
