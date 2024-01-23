@@ -1,4 +1,4 @@
-import React from "react";
+"use client";
 import Layout from "@/components/Layout/Layout";
 import MainContainer from "@/components/Navigation/mainContainer";
 import useSWR from "swr";
