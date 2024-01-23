@@ -2,6 +2,7 @@
 import React from "react";
 import Layout from "@/components/Layout/Layout";
 import MainContainer from "@/components/Navigation/mainContainer";
+import TaskList from "@/components/TaskList/TaskList";
 import useSWR from "swr";
 import { Spinner } from "@chakra-ui/react";
 
