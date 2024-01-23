@@ -1,27 +1,48 @@
 "use client";
-import { ColorModeScript } from "@chakra-ui/react";
 import Head from "next/head";
-import { SWRConfig } from "swr";
-import MenuContainer from "@/components/Navigation/MenuContainer";
 import { Flex, Spinner } from "@chakra-ui/react";
 import MainContainer from "@/components/Navigation/mainContainer";
 import { theme } from "../theme";
 
-console.log("theme", theme);
+import React from "react";
+import Layout from "@/components/Layout/Layout";
+import InputForm from "@/components/Task/AddTaskInput";
+import TaskList from "@/components/TaskList/TaskList";
+import useSWR from "swr";
 
-export default function Home() {
+const IndexPage = () => {
+  const { data: tasks, isLoading, error } = useSWR("/api/tasks");
+
+  console.log("all tasks", tasks);
+
+  if (isLoading) {
+    return (
+      <>
+        <h1>Loading...</h1>
+        <Spinner size="xl" />
+      </>
+    );
+  }
+
+  if (error) {
+    return <div>failed to load</div>;
+  }
+
+  if (!tasks) {
+    return;
+  }
+
+
   return (
-    <>
-      <ColorModeScript initialColorMode={theme.config.initialColorMode} />
-      <SWRConfig>
-        <Head>
-          <title>TaskTango</title>
-        </Head>
-        <Flex margin="8" gap="8">
-          <MenuContainer />
-          <MainContainer mainTitle={"Upcoming"} flex="1"></MainContainer>
-        </Flex>
-      </SWRConfig>
-    </>
+    <Layout title="TaskTango - Home Page">
+      <MainContainer mainTitle="Add a new task" flex="1">
+        <InputForm />
+        <TaskList tasks={tasks} />
+      </MainContainer>
+    </Layout>
+
+
   );
-}
+};
+
+export default IndexPage;

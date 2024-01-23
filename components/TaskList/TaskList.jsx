@@ -13,7 +13,7 @@ import { deleteTask } from "../Task/functions/deleteTask";
 import { completedTask } from "../Task/functions/completedTask";
 import { useSWRConfig } from "swr";
 
-export default function TaskList({ tasks }) {
+export default function TaskList({ listTitle, tasks }) {
   const toast = useToast();
   const { mutate } = useSWRConfig();
 
@@ -52,6 +52,7 @@ export default function TaskList({ tasks }) {
       });
     }
   };
+
   const handleCompletedTask = async (taskID) => {
     try {
       // Optimistic Update
