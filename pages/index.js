@@ -8,7 +8,7 @@ import TaskList from "@/components/TaskList/TaskList";
 import useSWR from "swr";
 
 const IndexPage = () => {
-  const { data: tasks, isLoading, error } = useSWR("/api/tasks");
+  const { data: tasks, mutate: mutate, isLoading, error } = useSWR("/api/tasks");
 
   console.log("all tasks", tasks);
 
@@ -33,7 +33,7 @@ const IndexPage = () => {
     <Layout title="TaskTango - Home Page">
       <MainContainer mainTitle="Add a new task" flex="1">
         <InputForm />
-        <TaskList tasks={tasks} />
+        <TaskList tasks={tasks} mutate={mutate}/>
       </MainContainer>
     </Layout>
   );

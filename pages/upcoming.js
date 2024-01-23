@@ -8,9 +8,10 @@ import { Spinner } from "@chakra-ui/react";
 const UpcomingPage = () => {
   const {
     data: upcomingTasks,
+    mutate: mutate,
     isLoading,
     error,
-  } = useSWR("/api/tasks", async () => (await fetch("/api/status/upcoming")).json());
+  } = useSWR("/api/status/upcoming");
 
   if (isLoading) {
     return (
@@ -33,7 +34,7 @@ const UpcomingPage = () => {
   return (
     <Layout title="TaskTango - Upcoming">
       <MainContainer mainTitle="Upcoming">
-        <TaskList tasks={upcomingTasks} />
+        <TaskList tasks={upcomingTasks} mutate={mutate} />
       </MainContainer>
     </Layout>
   );

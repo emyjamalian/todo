@@ -9,11 +9,10 @@ import { Spinner } from "@chakra-ui/react";
 const DonePage = () => {
   const {
     data: doneTasks,
+    mutate: mutate,
     isLoading,
     error,
-  } = useSWR("/api/tasks", async () =>
-    (await fetch("/api/status/done")).json()
-  );
+  } = useSWR("/api/status/done");
 
   if (!doneTasks) {
     return;
@@ -35,7 +34,7 @@ const DonePage = () => {
   return (
     <Layout title="TaskTango - Done">
       <MainContainer mainTitle="Done">
-        <TaskList tasks={doneTasks} />
+        <TaskList tasks={doneTasks} mutate={mutate} />
       </MainContainer>
     </Layout>
   );

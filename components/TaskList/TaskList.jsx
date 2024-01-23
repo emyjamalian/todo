@@ -14,25 +14,18 @@ import {
 } from "@chakra-ui/react";
 import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import { deleteTask } from "../Task/functions/deleteTask";
-import { editTask } from "../Task/functions/editTask";
-import { completedTask } from "../Task/functions/completedTask";
-import { useSWRConfig } from "swr";
 
-export default function TaskList({ tasks }) {
+export default function TaskList({ tasks, mutate }) {
   const toast = useToast();
-  const { mutate } = useSWRConfig();
 
   const handleDeleteTask = async (taskId) => {
     try {
-      mutate(
-        "/api/tasks",
-        (data) => {
-          return data.filter((task) => task._id !== taskId);
+      await mutate(deleteTask(taskId), {
+        populateCache: (_ignore, oldTasks) => {
+          return oldTasks.filter((task) => task._id !== taskId);
         },
-        false
-      );
-
-      await deleteTask(taskId);
+        revalidate: false,
+      });
 
       toast({
         title: "Task deleted",
@@ -40,10 +33,7 @@ export default function TaskList({ tasks }) {
         duration: 5000,
         isClosable: true,
       });
-
-      mutate("/api/tasks");
     } catch (error) {
-      mutate("/api/tasks");
       toast({
         title: "Error deleting task",
         description: error.message,
@@ -55,43 +45,56 @@ export default function TaskList({ tasks }) {
   };
   const handleEditTask = async (taskId, nextValue) => {
     try {
-      mutate(
-        "/api/tasks",
-        (data) => {
-          return data.map((task) => {
-            if (task._id === taskId) {
-              return { ...task, title: nextValue };
-            }
-            return task;
-          });
-        },
-        true
+      await mutate(
+        () =>
+          fetch(`/api/tasks/${taskId}`, {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(nextValue),
+          }).then((res) => res.json()),
+        {
+          populateCache: (editedTask, oldTasks) => {
+            const filteredTasks = oldTasks.filter(
+              (task) => task._id !== taskId
+            );
+            return [...filteredTasks, editedTask];
+          },
+          revalidate: false,
+        }
       );
-      await editTask(taskId, nextValue);
-
-      mutate("/api/tasks");
     } catch (error) {
-      mutate("/api/tasks");
+      toast({
+        title: "Error editing task",
+        description: error.message,
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
     }
   };
 
   const handleCompletedTask = async (taskId) => {
     try {
-      mutate(
-        "/api/tasks",
-        (data) => {
-          return data.map((task) => {
-            if (task._id === taskId) {
-              return { ...task, completed: true };
-            }
-            return task;
-          });
-        },
-        true
+      await mutate(
+        () =>
+          fetch(`/api/tasks/${taskId}/toggleCompleted`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }).then((res) => res.json()),
+        {
+          populateCache: (updatedTask, oldTasks) => {
+            const filteredTasks = oldTasks.filter(
+              (task) => task._id !== taskId
+            );
+            return [...filteredTasks, updatedTask];
+          },
+          revalidate: true, // because this list does not know whether to display all or just a section of the tasks
+        }
       );
-      await completedTask(taskId);
-
-      mutate("/api/tasks");
 
       toast({
         title: "Task Done",
@@ -100,8 +103,6 @@ export default function TaskList({ tasks }) {
         isClosable: true,
       });
     } catch (error) {
-      mutate("/api/tasks");
-
       toast({
         title: "Error completing task",
         description: error.message,

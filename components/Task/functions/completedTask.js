@@ -1,9 +1,8 @@
 export async function completedTask(taskId) {
-  const response = await fetch(`/api/tasks/${taskId}`, {
-    method: "PATCH",
+  await fetch(`/api/tasks/${taskId}/toggleCompleted`, {
+    method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({}),
   });
 }
