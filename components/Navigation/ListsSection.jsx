@@ -4,21 +4,22 @@ import {
   CopyIcon,
   PlusSquareIcon,
 } from "@chakra-ui/icons";
-import { List, ListItem, ListIcon, Box, Heading } from "@chakra-ui/react";
+import {
+  List,
+  ListItem,
+  ListIcon,
+  Box,
+  Heading,
+  useColorModeValue,
+} from "@chakra-ui/react";
 
 export default function ListsSection() {
   return (
     <>
-      <Heading color="black" paddingTop="5" size="sm" mb={5} noOfLines={1}>
+      <Heading paddingTop="5" size="sm" mb={5} noOfLines={1}>
         {"Lists"}
       </Heading>
-      <Box
-        color="gray.800"
-        overflow="hidden"
-        lineHeight="tight"
-        fontSize="sm"
-        marginBottom="15"
-      >
+      <Box overflow="hidden" lineHeight="tight" fontSize="sm" marginBottom="15">
         <nav>
           <List spacing={5}>
             <ListItem className="menu-item">
