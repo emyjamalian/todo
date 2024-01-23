@@ -7,9 +7,14 @@ import useSWR from "swr";
 import { Spinner } from "@chakra-ui/react";
 
 const DonePage = () => {
-  const { data: doneTasks, isLoading, error } = useSWR("/api/status/done");
+  const {
+    data: doneTasks,
+    isLoading,
+    error,
+  } = useSWR("/api/tasks", async () =>
+    (await fetch("/api/status/done")).json()
+  );
 
-  console.log("done tasks", doneTasks);
   if (!doneTasks) {
     return;
   }

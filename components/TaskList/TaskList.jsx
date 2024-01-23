@@ -4,22 +4,26 @@ import {
   UnorderedList,
   IconButton,
   Spacer,
+  HStack,
   Divider,
   Flex,
   useToast,
+  Editable,
+  EditableInput,
+  EditablePreview,
 } from "@chakra-ui/react";
 import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import { deleteTask } from "../Task/functions/deleteTask";
+import { editTask } from "../Task/functions/editTask";
 import { completedTask } from "../Task/functions/completedTask";
 import { useSWRConfig } from "swr";
 
-export default function TaskList({ listTitle, tasks }) {
+export default function TaskList({ tasks }) {
   const toast = useToast();
   const { mutate } = useSWRConfig();
 
   const handleDeleteTask = async (taskId) => {
     try {
-      // Optimistic Update
       mutate(
         "/api/tasks",
         (data) => {
@@ -30,7 +34,6 @@ export default function TaskList({ listTitle, tasks }) {
 
       await deleteTask(taskId);
 
-      // Successful delete
       toast({
         title: "Task deleted",
         status: "warning",
@@ -38,10 +41,8 @@ export default function TaskList({ listTitle, tasks }) {
         isClosable: true,
       });
 
-      // Revalidate after successful operation
       mutate("/api/tasks");
     } catch (error) {
-      // Revert to the previous data on error
       mutate("/api/tasks");
       toast({
         title: "Error deleting task",
@@ -52,15 +53,35 @@ export default function TaskList({ listTitle, tasks }) {
       });
     }
   };
-
-  const handleCompletedTask = async (taskID) => {
+  const handleEditTask = async (taskId, nextValue) => {
     try {
-      // Optimistic Update
       mutate(
         "/api/tasks",
         (data) => {
           return data.map((task) => {
-            if (task._id === taskID) {
+            if (task._id === taskId) {
+              return { ...task, title: nextValue };
+            }
+            return task;
+          });
+        },
+        true
+      );
+      await editTask(taskId, nextValue);
+
+      mutate("/api/tasks");
+    } catch (error) {
+      mutate("/api/tasks");
+    }
+  };
+
+  const handleCompletedTask = async (taskId) => {
+    try {
+      mutate(
+        "/api/tasks",
+        (data) => {
+          return data.map((task) => {
+            if (task._id === taskId) {
               return { ...task, completed: true };
             }
             return task;
@@ -68,14 +89,10 @@ export default function TaskList({ listTitle, tasks }) {
         },
         true
       );
+      await completedTask(taskId);
 
-      // Mark task as completed
-      await completedTask(taskID);
-
-      // Revalidate after successful operation
       mutate("/api/tasks");
 
-      // Show success toast
       toast({
         title: "Task Done",
         status: "success",
@@ -83,10 +100,8 @@ export default function TaskList({ listTitle, tasks }) {
         isClosable: true,
       });
     } catch (error) {
-      // Revert to the previous data on error
       mutate("/api/tasks");
 
-      // Show error toast
       toast({
         title: "Error completing task",
         description: error.message,
@@ -97,27 +112,27 @@ export default function TaskList({ listTitle, tasks }) {
     }
   };
 
-  // const handleEditTask = async (event) => {
-  //   event.preventDefault();
-  //   const taskFormData = new FormData(event.target);
-  //   const taskTitle = Object.fromEntries(taskFormData);
-
-  //   editTask(taskId, taskTitle);
-  // };
-
   return (
     <UnorderedList styleType="none" spacing={5} marginTop={5}>
       {tasks.map((task) => (
         <ListItem key={task._id} w="100%">
           <Flex>
-            <Checkbox
-              key={task._id}
-              // href={`/${task._id}`}
-              isChecked={task.completed}
-              onChange={() => handleCompletedTask(task._id)}
-            >
-              {task.title}
-            </Checkbox>
+            <HStack spacing="12px">
+              <Checkbox
+                key={task._id}
+                // href={`/${task._id}`}
+                isChecked={task.completed}
+                onChange={() => handleCompletedTask(task._id)}
+              ></Checkbox>
+
+              <Editable
+                defaultValue={task.title}
+                onSubmit={(nextValue) => handleEditTask(task._id, nextValue)}
+              >
+                <EditablePreview />
+                <EditableInput />
+              </Editable>
+            </HStack>
             <Spacer />
             {/* <IconButton
               aria-label="Delete a task"
