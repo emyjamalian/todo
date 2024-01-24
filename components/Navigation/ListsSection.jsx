@@ -12,8 +12,11 @@ import {
   Heading,
   useColorModeValue,
 } from "@chakra-ui/react";
+import { useTaskStore } from "@/store";
 
 export default function ListsSection() {
+  const activeList = useTaskStore((state) => state.activeList);
+
   return (
     <>
       <Heading paddingTop="5" size="sm" mb={5} noOfLines={1}>
@@ -22,19 +25,28 @@ export default function ListsSection() {
       <Box overflow="hidden" lineHeight="tight" fontSize="sm" marginBottom="15">
         <nav>
           <List spacing={5}>
-            <ListItem className="menu-item">
+            <ListItem
+              fontWeight={activeList === "TaskTango - Home Page" ? "bold" : ""}
+              className="menu-item"
+            >
               <Box as="a" href="/">
                 <ListIcon as={PlusSquareIcon} />
-                Add a new task
+                All Tasks
               </Box>
             </ListItem>
-            <ListItem className="menu-item">
+            <ListItem
+              className="menu-item"
+              fontWeight={activeList === "TaskTango - Upcoming" ? "bold" : ""}
+            >
               <Box as="a" href="/upcoming">
                 <ListIcon as={ArrowRightIcon} />
                 Upcoming
               </Box>
             </ListItem>
-            <ListItem className="menu-item">
+            <ListItem
+              className="menu-item"
+              fontWeight={activeList === "TaskTango - Done" ? "bold" : ""}
+            >
               <Box as="a" href="/done">
                 <ListIcon as={CheckCircleIcon} />
                 Done

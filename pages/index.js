@@ -6,11 +6,13 @@ import Layout from "@/components/Layout/Layout";
 import InputForm from "@/components/Task/AddTaskInput";
 import TaskList from "@/components/TaskList/TaskList";
 import useSWR from "swr";
+import { useTaskStore } from "@/store";
 
 const IndexPage = () => {
   const { data: tasks, isLoading, error } = useSWR("/api/tasks");
 
-  console.log("all tasks", tasks);
+  const setActiveList = useTaskStore((state) => state.setActiveList);
+  setActiveList("TaskTango - Home Page");
 
   if (isLoading) {
     return (
@@ -31,7 +33,7 @@ const IndexPage = () => {
 
   return (
     <Layout title="TaskTango - Home Page">
-      <MainContainer mainTitle="Add a new task" flex="1">
+      <MainContainer mainTitle="All Tasks" flex="1">
         <InputForm />
         <TaskList tasks={tasks} />
       </MainContainer>
