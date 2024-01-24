@@ -31,6 +31,7 @@ export default function InputForm() {
           <AddIcon color="gray.300" />
         </InputLeftElement>
         <Input
+          aria-label="add New Task"
           autoFocus
           id="title"
           name="title"

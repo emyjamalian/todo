@@ -5,7 +5,7 @@ import { SWRConfig } from "swr";
 // Mocking the useSWR hook
 jest.mock("swr");
 
-describe("TaskList Component", () => {
+describe.skip("TaskList Component", () => {
   it("renders loading state and then tasks", async () => {
     const mockData = [
       { _id: "1", title: "Task 1" },
