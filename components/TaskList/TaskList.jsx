@@ -17,10 +17,14 @@ import { deleteTask } from "../Task/functions/deleteTask";
 import { editTask } from "../Task/functions/editTask";
 import { completedTask } from "../Task/functions/completedTask";
 import { useSWRConfig } from "swr";
+import { useTaskStore } from "@/store";
+import JSConfetti from "js-confetti";
 
 export default function TaskList({ tasks }) {
   const toast = useToast();
   const { mutate } = useSWRConfig();
+  const funMode = useTaskStore((state) => state.funMode);
+  const confetti = new JSConfetti();
 
   const handleDeleteTask = async (taskId) => {
     try {
@@ -75,30 +79,36 @@ export default function TaskList({ tasks }) {
     }
   };
 
-  const handleCompletedTask = async (taskId) => {
+  const handleCompletedTask = async (taskId, event) => {
     try {
       mutate(
         "/api/tasks",
         (data) => {
           return data.map((task) => {
             if (task._id === taskId) {
-              return { ...task, completed: true };
+              return { ...task, completed: event.target.checked };
             }
             return task;
           });
         },
-        true
+        false
       );
       await completedTask(taskId);
 
       mutate("/api/tasks");
 
-      toast({
-        title: "Task Done",
-        status: "success",
-        duration: 5000,
-        isClosable: true,
-      });
+      if (event.target.checked) {
+        if (funMode) {
+          confetti.addConfetti();
+        } else {
+          toast({
+            title: "Task Done",
+            status: "success",
+            duration: 5000,
+            isClosable: true,
+          });
+        }
+      }
     } catch (error) {
       mutate("/api/tasks");
 
@@ -122,7 +132,7 @@ export default function TaskList({ tasks }) {
                 key={task._id}
                 // href={`/${task._id}`}
                 isChecked={task.completed}
-                onChange={() => handleCompletedTask(task._id)}
+                onChange={(event) => handleCompletedTask(task._id, event)}
               ></Checkbox>
 
               <Editable

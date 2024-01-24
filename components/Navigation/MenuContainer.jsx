@@ -9,6 +9,7 @@ import {
 import Search from "./Search";
 import ListsSection from "./ListsSection";
 import DarkMode from "./DarkMode";
+import FunMode from "./FunMode";
 
 export default function MenuContainer() {
   const bg = useColorModeValue("gray.200", "gray.700");
@@ -26,6 +27,7 @@ export default function MenuContainer() {
         </Box>
         <Spacer />
         <DarkMode />
+        <FunMode />
       </Flex>
     </Box>
   );
