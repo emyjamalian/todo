@@ -100,7 +100,11 @@ export default function TaskList({ tasks }) {
 
       if (event.target.checked) {
         if (funMode) {
-          confetti.addConfetti();
+          confetti.addConfetti({
+            emojis: ["🌈", "🐻", "✏️", "✅", "🥳", "🎉", "🦄", "🐻", "🐼"],
+            emojiSize: 150,
+            confettiRadius: 100,
+          });
         } else {
           toast({
             title: "Task Done",
@@ -141,7 +145,7 @@ export default function TaskList({ tasks }) {
                 defaultValue={task.title}
                 onSubmit={(nextValue) => handleEditTask(task._id, nextValue)}
               >
-                <EditablePreview />
+                <EditablePreview as={task.completed ? "del" : ""} />
                 <Input
                   as={EditableInput}
                   focusBorderColor="teal.400"

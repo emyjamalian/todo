@@ -1,7 +1,7 @@
 import { FormControl, FormLabel, Switch, useColorMode } from "@chakra-ui/react";
 
 export default function DarkMode() {
-  const { colorMode, toggleColorMode } = useColorMode();
+  const { toggleColorMode } = useColorMode();
 
   return (
     <FormControl
@@ -10,9 +10,9 @@ export default function DarkMode() {
       justifyContent="space-between"
     >
       <FormLabel htmlFor="dark-mode" mb="0">
-         {colorMode === "light" ? "Dark" : "Light"} Mode
+        Dark Mode
       </FormLabel>
-      <Switch colorScheme='teal' id="dark-mode" onChange={toggleColorMode} />
+      <Switch colorScheme="teal" id="dark-mode" onChange={toggleColorMode} />
     </FormControl>
   );
 }
