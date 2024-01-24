@@ -14,9 +14,9 @@ export default function FunMode() {
       justifyContent="space-between"
     >
       <FormLabel htmlFor="fun-mode" mb="0">
-        Toggle {funMode ? "Normal" : "Fun"}
+        {funMode ? "Normal" : "Fun"} Mode
       </FormLabel>
-      <Switch id="fun-mode" isChecked={funMode} onChange={toggleFunMode} />
+      <Switch colorScheme='teal' id="fun-mode" isChecked={funMode} onChange={toggleFunMode} />
     </FormControl>
   );
 }

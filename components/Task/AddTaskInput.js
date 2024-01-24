@@ -31,6 +31,7 @@ export default function InputForm() {
           <AddIcon color="gray.300" />
         </InputLeftElement>
         <Input
+          focusBorderColor="teal.400"
           autoFocus
           id="title"
           name="title"

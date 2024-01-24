@@ -5,6 +5,7 @@ import {
   IconButton,
   Spacer,
   HStack,
+  Input,
   Divider,
   Flex,
   useToast,
@@ -129,6 +130,7 @@ export default function TaskList({ tasks }) {
           <Flex>
             <HStack spacing="12px">
               <Checkbox
+                colorScheme="teal"
                 key={task._id}
                 // href={`/${task._id}`}
                 isChecked={task.completed}
@@ -140,7 +142,11 @@ export default function TaskList({ tasks }) {
                 onSubmit={(nextValue) => handleEditTask(task._id, nextValue)}
               >
                 <EditablePreview />
-                <EditableInput />
+                <Input
+                  as={EditableInput}
+                  focusBorderColor="teal.400"
+                  size="sm"
+                />
               </Editable>
             </HStack>
             <Spacer />

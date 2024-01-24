@@ -10,9 +10,9 @@ export default function DarkMode() {
       justifyContent="space-between"
     >
       <FormLabel htmlFor="dark-mode" mb="0">
-        Toggle {colorMode === "light" ? "Dark" : "Light"}
+         {colorMode === "light" ? "Dark" : "Light"} Mode
       </FormLabel>
-      <Switch id="dark-mode" onChange={toggleColorMode} />
+      <Switch colorScheme='teal' id="dark-mode" onChange={toggleColorMode} />
     </FormControl>
   );
 }
