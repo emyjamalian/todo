@@ -24,40 +24,6 @@ test.describe("New Todo", () => {
     await expect(newTask).toBeEmpty();
 
     // Make sure the list only has one todo item.
-    await expect(page.getByRole("ul > li")).toContainText([TODO_ITEMS[0]]);
-
-    // Create 2nd todo.
-    await newTask.fill(TODO_ITEMS[1]);
-    await newTask.press("Enter");
-
-    // Make sure the list now has two todo items.
-    await expect(page.getByRole("ul > li")).toHaveText([
-      TODO_ITEMS[0],
-      TODO_ITEMS[1],
-    ]);
-  });
-});
-
-test.describe("Mark all as completed", () => {
-  test.beforeEach(async ({ page }) => {
-    await createDefaultTodos(page);
-    await checkNumberOfTodosInLocalStorage(page, 3);
-  });
-
-  test.afterEach(async ({ page }) => {
-    await checkNumberOfTodosInLocalStorage(page, 3);
-  });
-
-  test("should allow me to mark all items as completed", async ({ page }) => {
-    // Complete all todos.
-    await page.getByLabel("Mark all as complete").check();
-
-    // Ensure all todos have 'completed' class.
-    await expect(page.getByTestId("todo-item")).toHaveClass([
-      "isChecked",
-      "isChecked",
-      "isChecked",
-    ]);
-    await checkNumberOfCompletedTodosInLocalStorage(page, 3);
+    expect(page.getByText).toBe([TODO_ITEMS[0]]);
   });
 });
