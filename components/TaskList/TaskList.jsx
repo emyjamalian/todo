@@ -56,10 +56,9 @@ export default function TaskList({ tasks, mutate }) {
           }).then((res) => res.json()),
         {
           populateCache: (editedTask, oldTasks) => {
-            const filteredTasks = oldTasks.filter(
-              (task) => task._id !== taskId
+            return oldTasks.map((task) =>
+              task._id === editedTask ? editedTask : task
             );
-            return [...filteredTasks, editedTask];
           },
           revalidate: false,
         }
@@ -87,10 +86,9 @@ export default function TaskList({ tasks, mutate }) {
           }).then((res) => res.json()),
         {
           populateCache: (updatedTask, oldTasks) => {
-            const filteredTasks = oldTasks.filter(
-              (task) => task._id !== taskId
+            return oldTasks.map((task) =>
+              task._id === updatedTask ? updatedTask : task
             );
-            return [...filteredTasks, updatedTask];
           },
           revalidate: true, // because this list does not know whether to display all or just a section of the tasks
         }
