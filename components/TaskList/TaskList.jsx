@@ -24,14 +24,6 @@ export default function TaskList({ tasks }) {
 
   const handleDeleteTask = async (taskId) => {
     try {
-      mutate(
-        "/api/tasks",
-        (data) => {
-          return data.filter((task) => task._id !== taskId);
-        },
-        false
-      );
-
       await deleteTask(taskId);
 
       toast({
