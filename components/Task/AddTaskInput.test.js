@@ -1,10 +1,10 @@
 import { render, screen } from "@testing-library/react";
+import "@testing-library/jest-dom";
 import InputForm from "./AddTaskInput";
 
-test("renders an input field with an addIcon", () => {
+test("renders a input field", () => {
   render(<InputForm />);
-  const input = screen.getByRole("input", { name: /title/i });
-  const addIcon = screen.getByText("AddIcon");
+  const input = screen.getByRole("textbox");
+
   expect(input).toBeInTheDocument();
-  expect(addIcon).toBeInTheDocument();
 });

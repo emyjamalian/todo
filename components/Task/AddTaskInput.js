@@ -12,25 +12,16 @@ export default function InputForm() {
     const taskTitle = Object.fromEntries(formData);
 
     try {
-      // Optimistic Update
-      mutate("/api/tasks", false);
-
-      // Add Task
       await AddTask(taskTitle);
 
-      // Revalidate after successful operation
-      mutate("/api/tasks");
-
-      // Focus on the input element
-      const inputElement = event.target.elements.title; // "title" is the name attribute of the input
+      const inputElement = event.target.elements.title;
       inputElement && inputElement.focus();
 
-      // Reset form
       event.target.reset();
     } catch (error) {
-      // Revert to the previous data on error
-      mutate("/api/tasks");
       console.error("Error adding task:", error);
+    } finally {
+      mutate("/api/tasks");
     }
   };
   return (
@@ -39,7 +30,13 @@ export default function InputForm() {
         <InputLeftElement pointerEvents="none">
           <AddIcon color="gray.300" />
         </InputLeftElement>
-        <Input id="title" name="title" type="text" placeholder="Add new task" />
+        <Input
+          autoFocus
+          id="title"
+          name="title"
+          type="text"
+          placeholder="Add new task"
+        />
       </InputGroup>
     </form>
   );
