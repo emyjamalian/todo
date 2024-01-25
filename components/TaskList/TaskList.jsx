@@ -24,14 +24,6 @@ export default function TaskList({ tasks }) {
 
   const handleDeleteTask = async (taskId) => {
     try {
-      mutate(
-        "/api/tasks",
-        (data) => {
-          return data.filter((task) => task._id !== taskId);
-        },
-        false
-      );
-
       await deleteTask(taskId);
 
       toast({
@@ -77,18 +69,6 @@ export default function TaskList({ tasks }) {
 
   const handleCompletedTask = async (taskId) => {
     try {
-      mutate(
-        "/api/tasks",
-        (data) => {
-          return data.map((task) => {
-            if (task._id === taskId) {
-              return { ...task, completed: true };
-            }
-            return task;
-          });
-        },
-        true
-      );
       await completedTask(taskId);
 
       mutate("/api/tasks");
@@ -120,7 +100,6 @@ export default function TaskList({ tasks }) {
             <HStack spacing="12px">
               <Checkbox
                 key={task._id}
-                // href={`/${task._id}`}
                 isChecked={task.completed}
                 onChange={() => handleCompletedTask(task._id)}
               ></Checkbox>
@@ -134,12 +113,6 @@ export default function TaskList({ tasks }) {
               </Editable>
             </HStack>
             <Spacer />
-            {/* <IconButton
-              aria-label="Delete a task"
-              size="xs"
-              margin="0 5px 5px 0"
-              icon={<EditIcon />}
-            /> */}
             <IconButton
               aria-label="Delete a task"
               size="xs"
