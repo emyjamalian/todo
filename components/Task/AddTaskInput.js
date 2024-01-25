@@ -26,11 +26,13 @@ export default function InputForm() {
   };
   return (
     <form onSubmit={handleSubmit}>
-      <InputGroup>
+      <InputGroup
+     >
         <InputLeftElement pointerEvents="none">
           <AddIcon color="gray.300" />
         </InputLeftElement>
         <Input
+         borderRadius={10}
           autoFocus
           id="title"
           name="title"

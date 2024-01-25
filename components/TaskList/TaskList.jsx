@@ -93,9 +93,22 @@ export default function TaskList({ tasks }) {
   };
 
   return (
-    <UnorderedList styleType="none" spacing={5} marginTop={5}>
+    <UnorderedList styleType="none" spacing={0} marginTop={5}>
       {tasks.map((task) => (
-        <ListItem key={task._id} w="100%">
+        <ListItem
+        borderRadius={10}
+          key={task._id}
+          
+          w="100%"
+          p={1.5}
+          pl={3}
+          pr={3}
+          _hover={{
+            size: "xl",
+            boxShadow: "0 8px 16px rgba(0, 0, 0, 0.2)",
+            transition: "box-shadow 0.3s",
+          }}
+        >
           <Flex>
             <HStack spacing="12px">
               <Checkbox
@@ -105,24 +118,30 @@ export default function TaskList({ tasks }) {
               ></Checkbox>
 
               <Editable
+              width="100%"
                 defaultValue={task.title}
                 onSubmit={(nextValue) => handleEditTask(task._id, nextValue)}
               >
                 <EditablePreview />
-                <EditableInput />
+                <EditableInput width="auto"/>
               </Editable>
             </HStack>
             <Spacer />
             <IconButton
-              aria-label="Delete a task"
+_focus={{
+  boxShadow:
+    '0 0 1px 2px rgba(88, 144, 255, .75), 0 1px 1px rgba(0, 0, 0, .15)',
+}}
+aria-label="Delete a task"
               size="xs"
               color="red.300"
-              margin="0 5px 5px 0"
+              margin="4px 0 0 0"
               icon={<DeleteIcon />}
               onClick={() => handleDeleteTask(task._id)}
+              
             />
           </Flex>
-          <Divider />
+          {/* <Divider /> */}
         </ListItem>
       ))}
     </UnorderedList>
