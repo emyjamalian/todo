@@ -13,7 +13,7 @@ import {
   EditableInput,
   EditablePreview,
 } from "@chakra-ui/react";
-import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
+import { DeleteIcon } from "@chakra-ui/icons";
 import { deleteTask } from "../Task/functions/deleteTask";
 import { editTask } from "../Task/functions/editTask";
 import { completedTask } from "../Task/functions/completedTask";
