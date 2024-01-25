@@ -6,7 +6,7 @@ test.beforeEach(async ({ page }) => {
 });
 
 test.describe("New Todo", () => {
-  test("should allow me to add todo items", async ({ page }) => {
+  test("Add a task and verify it appears in the list", async ({ page }) => {
     await expect(page).toHaveTitle("TaskTango - Home Page");
 
     // Wait for the new task input to appear
