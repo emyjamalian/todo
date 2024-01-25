@@ -1,14 +1,37 @@
-import { Input, InputLeftElement, InputGroup } from "@chakra-ui/react";
+import {
+  Input,
+  InputLeftElement,
+  InputGroup,
+  CloseButton,
+  InputRightElement,
+} from "@chakra-ui/react";
 import { Search2Icon } from "@chakra-ui/icons";
+import { useTaskStore } from "@/store";
+import { useState } from "react";
 
 export default function Search() {
+  const setSearchTerm = useTaskStore((state) => state.setSearchTerm);
+  const [inputValue, setInputValue] = useState("");
+
+  const handleSearchChange = (event) => {
+    setInputValue(event.target.value);
+    setSearchTerm(event.target.value);
+  };
+
+  const handleResetSearch = () => {
+    setInputValue("");
+    setSearchTerm("");
+  };
+
   return (
     <form>
-      <InputGroup>
+      <InputGroup width={250}>
         <InputLeftElement pointerEvents="none">
           <Search2Icon color="black" />
         </InputLeftElement>
         <Input
+          value={inputValue}
+          onChange={handleSearchChange}
           id="search"
           name="search"
           type="text"
@@ -17,9 +40,20 @@ export default function Search() {
           _placeholder={{ opacity: 1, color: "gray.500" }}
           // color="black"
           bg="gray.100"
+          focusBorderColor="teal.400"
           borderRadius="full"
           width="auto"
         />
+        {inputValue ? (
+          <InputRightElement width="4.5rem">
+            <CloseButton
+              colorScheme="red"
+              onClick={handleResetSearch}
+            ></CloseButton>
+          </InputRightElement>
+        ) : (
+          ""
+        )}
       </InputGroup>
     </form>
   );

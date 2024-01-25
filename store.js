@@ -7,6 +7,8 @@ export const useTaskStore = create(
       funMode: false,
       activeList: null,
       setActiveList: (newActiveList) => set({ activeList: newActiveList }),
+      searchTerm: "",
+      setSearchTerm: (newSearchTerm) => set({ searchTerm: newSearchTerm }),
       toggleFunMode: () =>
         set((state) => ({
           funMode: !state.funMode,

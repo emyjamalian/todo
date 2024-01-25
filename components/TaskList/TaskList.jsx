@@ -26,6 +26,11 @@ export default function TaskList({ tasks }) {
   const { mutate } = useSWRConfig();
   const funMode = useTaskStore((state) => state.funMode);
   const confetti = new JSConfetti();
+  const searchTerm = useTaskStore((state) => state.searchTerm);
+
+  const filteredTasks = tasks.filter((task) =>
+    task.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   const handleDeleteTask = async (taskId) => {
     try {
@@ -73,7 +78,6 @@ export default function TaskList({ tasks }) {
 
   const handleCompletedTask = async (taskId, event) => {
     try {
-
       await completedTask(taskId);
 
       mutate("/api/tasks");
@@ -121,14 +125,9 @@ export default function TaskList({ tasks }) {
               ></Checkbox>
 
               <Editable
-              
                 defaultValue={task.title}
                 onSubmit={(nextValue) => handleEditTask(task._id, nextValue)}
               >
-                <EditablePreview 
-                
-                />
-                <EditableInput />
                 <EditablePreview as={task.completed ? "del" : ""} />
                 <Input
                   as={EditableInput}
