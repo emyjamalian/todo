@@ -9,13 +9,25 @@ import {
   ListItem,
   ListIcon,
   Box,
+  Badge,
   Heading,
   useColorModeValue,
 } from "@chakra-ui/react";
 import { useTaskStore } from "@/store";
+import useSWR from "swr";
 
 export default function ListsSection() {
+  
   const activeList = useTaskStore((state) => state.activeList);
+  const countingTasks = useTaskStore((state) => state.countingTasks);
+
+  const numberOfDoneTasks = countingTasks.filter((task) => task.completed).length;
+  const numberOfUpcomingTasks = countingTasks.length - numberOfDoneTasks;
+  
+
+  
+
+
 
   return (
     <>
@@ -30,9 +42,12 @@ export default function ListsSection() {
               fontWeight={activeList === "TaskTango - Home Page" ? "bold" : ""}
               className="menu-item"
             >
-              <Box as="a" href="/">
+              <Box as="a" href="/" alignItems="center" display="flex">
                 <ListIcon as={PlusSquareIcon} />
                 All Tasks
+                <Badge ml="2" borderRadius="full" px="2" colorScheme="gray">
+                  {countingTasks.length}
+                </Badge>
               </Box>
             </ListItem>
             <ListItem
@@ -40,9 +55,12 @@ export default function ListsSection() {
               color={activeList === "TaskTango - Upcoming" ? "teal" : ""}
               fontWeight={activeList === "TaskTango - Upcoming" ? "bold" : ""}
             >
-              <Box as="a" href="/upcoming">
+              <Box as="a" href="/upcoming" alignItems="center" display="flex">
                 <ListIcon as={ArrowRightIcon} />
                 Upcoming
+                <Badge ml="2" borderRadius="full" px="2" colorScheme="gray">
+                  {numberOfUpcomingTasks}
+                </Badge>
               </Box>
             </ListItem>
             <ListItem
@@ -50,13 +68,16 @@ export default function ListsSection() {
               color={activeList === "TaskTango - Done" ? "teal" : ""}
               fontWeight={activeList === "TaskTango - Done" ? "bold" : ""}
             >
-              <Box as="a" href="/done">
+              <Box as="a" href="/done" alignItems="center" display="flex">
                 <ListIcon as={CheckCircleIcon} />
                 Done
+                <Badge ml="2" borderRadius="full" px="2" colorScheme="gray">
+                  {numberOfDoneTasks}
+                </Badge>
               </Box>
             </ListItem>
             <ListItem className="menu-item">
-              <Box as="a" href="/stickywall">
+              <Box as="a" href="/stickywall" alignItems="center" display="flex">
                 <ListIcon as={CopyIcon} />
                 Sticky Wall
               </Box>
