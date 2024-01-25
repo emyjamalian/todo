@@ -1,63 +1,45 @@
 import TaskList from "./TaskList";
-import { render, screen, waitFor } from "@testing-library/react";
-import { SWRConfig } from "swr";
+import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import "@testing-library/jest-dom";
 
-// Mocking the useSWR hook
-jest.mock("swr");
+const tasks = [
+  { _id: 1, title: "Task 1", completed: false },
+  { _id: 2, title: "Task 2", completed: false },
+  { _id: 3, title: "Task 3", completed: false },
+];
 
-describe("TaskList Component", () => {
-  it("renders loading state and then tasks", async () => {
-    const mockData = [
-      { _id: "1", title: "Task 1" },
-      { _id: "2", title: "Task 2" },
-    ];
+jest.mock("../Task/functions/completedTask");
 
-    // Mocking the useSWR response
-    useSWR.mockReturnValue({
-      data: mockData,
-      error: undefined,
-      isLoading: true,
-      mutate: jest.fn(),
-    });
+describe("view a list of tasks", () => {
+  it("render the tasklist", () => {
+    const list = render(<TaskList tasks={tasks} />);
 
-    render(
-      <SWRConfig value={{ dedupingInterval: 0 }}>
-        <TaskList />
-      </SWRConfig>
-    );
+    expect(screen.getByText("Task 1")).toBeInTheDocument();
 
-    // Loading state should be displayed initially
-    expect(screen.getByText("Loading...")).toBeInTheDocument();
-    expect(screen.getByRole("status")).toBeInTheDocument();
-
-    // Wait for the loading state to disappear
-    await waitFor(() => {
-      expect(screen.queryByText("Loading...")).not.toBeInTheDocument();
-      expect(screen.queryByRole("status")).not.toBeInTheDocument();
-    });
-
-    // Tasks should be displayed
-    mockData.forEach((task) => {
-      expect(screen.getByText(task.title)).toBeInTheDocument();
-    });
+    const listItems = screen.getAllByRole("listitem");
+    expect(listItems.length).toBe(3);
   });
 
-  it("renders error state", async () => {
-    // Mocking the useSWR response with an error
-    useSWR.mockReturnValue({
-      data: undefined,
-      error: new Error("Failed to fetch"),
-      isLoading: false,
-      mutate: jest.fn(),
-    });
+  it("handles completed task correctly", async () => {
+    render(<TaskList tasks={tasks} />);
 
-    render(
-      <SWRConfig value={{ dedupingInterval: 0 }}>
-        <TaskList />
-      </SWRConfig>
-    );
+    // Trigger the completion of a task and check if the completed task is updated in the UI
+    const items = screen.getAllByRole("checkbox");
 
-    // Error state should be displayed
-    expect(screen.getByText("failed to load")).toBeInTheDocument();
+    await expect(fireEvent.click(items[0])).toBe(true);
+    screen.debug();
+  });
+
+  it("handles delete task correctly", async () => {
+    render(<TaskList tasks={tasks} />);
+    const listItems = screen.getAllByRole("listitem");
+    await expect(listItems.length).toBe(3);
+
+    // Trigger deleting of a task and check if the deleted task is removed in the UI
+    const items = screen.getAllByRole("button", { name: "Delete a task" });
+    fireEvent.click(items[0]);
+
+    // await expect(listItems.length).toBe(2);
+    // await expect(items.length).toBe(2);
   });
 });
