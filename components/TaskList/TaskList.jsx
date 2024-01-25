@@ -128,7 +128,6 @@ export default function TaskList({ tasks }) {
                 defaultValue={task.title}
                 onSubmit={(nextValue) => handleEditTask(task._id, nextValue)}
               >
-                <EditablePreview />
                 <EditableInput />
                 <EditablePreview as={task.completed ? "del" : ""} />
                 <Input
