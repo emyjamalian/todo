@@ -25,6 +25,7 @@ export default function TaskList({ tasks }) {
   const handleDeleteTask = async (taskId) => {
     try {
       await deleteTask(taskId);
+      mutate("/api/tasks");
 
       toast({
         title: "Task deleted",
@@ -32,8 +33,6 @@ export default function TaskList({ tasks }) {
         duration: 5000,
         isClosable: true,
       });
-
-      mutate("/api/tasks");
     } catch (error) {
       mutate("/api/tasks");
       toast({

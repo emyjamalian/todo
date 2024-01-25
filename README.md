@@ -11,3 +11,11 @@ Task Tango is a simple to-do app with some basic "TODO list" functionality.
 - `npm run dev`
 
 Then you'll be able to navigate to the `localhost:3000` in your browser and use the app.
+
+## Running tests
+
+### E2E tests (Cypress)
+
+- Navigate to the `tests/e2e` folder
+- `npm install`
+- `npm run test`
