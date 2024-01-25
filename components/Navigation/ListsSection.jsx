@@ -26,6 +26,7 @@ export default function ListsSection() {
         <nav>
           <List spacing={5}>
             <ListItem
+              color={activeList === "TaskTango - Home Page" ? "teal" : ""}
               fontWeight={activeList === "TaskTango - Home Page" ? "bold" : ""}
               className="menu-item"
             >
@@ -36,6 +37,7 @@ export default function ListsSection() {
             </ListItem>
             <ListItem
               className="menu-item"
+              color={activeList === "TaskTango - Upcoming" ? "teal" : ""}
               fontWeight={activeList === "TaskTango - Upcoming" ? "bold" : ""}
             >
               <Box as="a" href="/upcoming">
@@ -45,6 +47,7 @@ export default function ListsSection() {
             </ListItem>
             <ListItem
               className="menu-item"
+              color={activeList === "TaskTango - Done" ? "teal" : ""}
               fontWeight={activeList === "TaskTango - Done" ? "bold" : ""}
             >
               <Box as="a" href="/done">
