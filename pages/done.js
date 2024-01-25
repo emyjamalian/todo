@@ -5,11 +5,21 @@ import MainContainer from "@/components/Navigation/mainContainer";
 import TaskList from "@/components/TaskList/TaskList";
 import useSWR from "swr";
 import { Spinner } from "@chakra-ui/react";
+import { useTaskStore } from "@/store";
 
 const DonePage = () => {
-  const { data: doneTasks, isLoading, error } = useSWR("/api/status/done");
 
-  console.log("done tasks", doneTasks);
+  const setActiveList = useTaskStore((state) => state.setActiveList);
+  setActiveList("TaskTango - Done");
+  
+  const {
+    data: doneTasks,
+    isLoading,
+    error,
+  } = useSWR("/api/tasks", async () =>
+  (await fetch("/api/status/done")).json()
+  );
+  
   if (!doneTasks) {
     return;
   }

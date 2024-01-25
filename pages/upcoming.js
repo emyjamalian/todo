@@ -4,15 +4,19 @@ import MainContainer from "@/components/Navigation/mainContainer";
 import TaskList from "@/components/TaskList/TaskList";
 import useSWR from "swr";
 import { Spinner } from "@chakra-ui/react";
+import { useTaskStore } from "@/store";
 
 const UpcomingPage = () => {
+  const setActiveList = useTaskStore((state) => state.setActiveList);
+  setActiveList("TaskTango - Upcoming");
+
   const {
     data: upcomingTasks,
     isLoading,
     error,
-  } = useSWR("/api/status/upcoming");
-
-  console.log("upcoming tasks", upcomingTasks);
+  } = useSWR("/api/tasks", async () =>
+    (await fetch("/api/status/upcoming")).json()
+  );
 
   if (isLoading) {
     return (
