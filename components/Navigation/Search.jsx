@@ -35,6 +35,7 @@ export default function Search() {
           id="search"
           name="search"
           type="text"
+          aria-label="search"
           placeholder="Search..."
           _placeholder={{ opacity: 1, color: "gray.500" }}
           // color="black"
