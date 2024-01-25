@@ -18,6 +18,7 @@ describe("view a list of tasks", () => {
 
     const listItems = screen.getAllByRole("listitem");
     expect(listItems.length).toBe(3);
+
   });
 
   it("handles completed task correctly", async () => {

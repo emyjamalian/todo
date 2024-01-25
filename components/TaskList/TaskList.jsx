@@ -121,9 +121,14 @@ export default function TaskList({ tasks }) {
               ></Checkbox>
 
               <Editable
+              
                 defaultValue={task.title}
                 onSubmit={(nextValue) => handleEditTask(task._id, nextValue)}
               >
+                <EditablePreview 
+                
+                />
+                <EditableInput />
                 <EditablePreview as={task.completed ? "del" : ""} />
                 <Input
                   as={EditableInput}
