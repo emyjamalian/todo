@@ -5,6 +5,7 @@ import {
   IconButton,
   Spacer,
   HStack,
+  Input,
   Divider,
   Flex,
   useToast,
@@ -17,22 +18,19 @@ import { deleteTask } from "../Task/functions/deleteTask";
 import { editTask } from "../Task/functions/editTask";
 import { completedTask } from "../Task/functions/completedTask";
 import { useSWRConfig } from "swr";
+import { useTaskStore } from "@/store";
+import JSConfetti from "js-confetti";
 
 export default function TaskList({ tasks }) {
   const toast = useToast();
   const { mutate } = useSWRConfig();
+  const funMode = useTaskStore((state) => state.funMode);
+  const confetti = new JSConfetti();
 
   const handleDeleteTask = async (taskId) => {
     try {
-      mutate(
-        "/api/tasks",
-        (data) => {
-          return data.filter((task) => task._id !== taskId);
-        },
-        false
-      );
-
       await deleteTask(taskId);
+      mutate("/api/tasks");
 
       toast({
         title: "Task deleted",
@@ -40,8 +38,6 @@ export default function TaskList({ tasks }) {
         duration: 5000,
         isClosable: true,
       });
-
-      mutate("/api/tasks");
     } catch (error) {
       mutate("/api/tasks");
       toast({
@@ -75,30 +71,29 @@ export default function TaskList({ tasks }) {
     }
   };
 
-  const handleCompletedTask = async (taskId) => {
+  const handleCompletedTask = async (taskId, event) => {
     try {
-      mutate(
-        "/api/tasks",
-        (data) => {
-          return data.map((task) => {
-            if (task._id === taskId) {
-              return { ...task, completed: true };
-            }
-            return task;
-          });
-        },
-        true
-      );
+
       await completedTask(taskId);
 
       mutate("/api/tasks");
 
-      toast({
-        title: "Task Done",
-        status: "success",
-        duration: 5000,
-        isClosable: true,
-      });
+      if (event.target.checked) {
+        if (funMode) {
+          confetti.addConfetti({
+            emojis: ["🌈", "🐻", "✏️", "✅", "🥳", "🎉", "🦄", "🐻", "🐼"],
+            emojiSize: 150,
+            confettiRadius: 100,
+          });
+        } else {
+          toast({
+            title: "Task Done",
+            status: "success",
+            duration: 5000,
+            isClosable: true,
+          });
+        }
+      }
     } catch (error) {
       mutate("/api/tasks");
 
@@ -119,10 +114,10 @@ export default function TaskList({ tasks }) {
           <Flex>
             <HStack spacing="12px">
               <Checkbox
+                colorScheme="teal"
                 key={task._id}
-                // href={`/${task._id}`}
                 isChecked={task.completed}
-                onChange={() => handleCompletedTask(task._id)}
+                onChange={(event) => handleCompletedTask(task._id, event)}
               ></Checkbox>
 
               <Editable
@@ -134,15 +129,15 @@ export default function TaskList({ tasks }) {
                 
                 />
                 <EditableInput />
+                <EditablePreview as={task.completed ? "del" : ""} />
+                <Input
+                  as={EditableInput}
+                  focusBorderColor="teal.400"
+                  size="sm"
+                />
               </Editable>
             </HStack>
             <Spacer />
-            {/* <IconButton
-              aria-label="Delete a task"
-              size="xs"
-              margin="0 5px 5px 0"
-              icon={<EditIcon />}
-            /> */}
             <IconButton
               aria-label="Delete a task"
               size="xs"
