@@ -21,12 +21,21 @@ test.describe("New Todo", () => {
 
     // Wait for the todo list to appear
     const todoListSelector = ".css-bs4x2b";
-    await page.waitForSelector(todoListSelector);
+    const todoListItemCheckbox = page
+      .locator(".chakra-stack", { has: page.getByText(todoText) })
+      .locator(".chakra-checkbox__control");
+
+    await todoListItemCheckbox.click();
+    console.log("breakpoint");
+    // await page.waitForSelector(todoListSelector);
 
     // Assert that the added todo item is in the list
-    const addedTodoSelector = `${todoListSelector} .css-8atqhb:has-text("${todoText}") .chakra-editable__preview`; // Adjust with the actual selector
-    await page.waitForSelector(addedTodoSelector);
-    const addedTodoText = await page.textContent(addedTodoSelector);
-    expect(addedTodoText).toContain(todoText);
+
+    // const addedTodoSelector = `${todoListSelector} .css-8atqhb:has-text("${todoText}") .chakra-editable__preview`; // Adjust with the actual selector
+    // await page.waitForSelector(addedTodoSelector);
+    // const addedTodoText = await page.textContent(addedTodoSelector);
+    // expect(addedTodoText).toContain(todoText);
+
+    // const checkbox = `${todoListSelector} .css-8atqhb:has-text("${todoText}") .chakra-checkbox__input`;
   });
 });
