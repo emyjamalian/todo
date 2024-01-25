@@ -25,7 +25,9 @@ describe("view a list of tasks", () => {
 
     // Trigger the completion of a task and check if the completed task is updated in the UI
     const items = screen.getAllByRole("checkbox");
+
     await expect(fireEvent.click(items[0])).toBe(true);
+    screen.debug();
   });
 
   it("handles delete task correctly", async () => {
@@ -36,6 +38,8 @@ describe("view a list of tasks", () => {
     // Trigger deleting of a task and check if the deleted task is removed in the UI
     const items = screen.getAllByRole("button", { name: "Delete a task" });
     fireEvent.click(items[0]);
+
     // await expect(listItems.length).toBe(2);
+    // await expect(items.length).toBe(2);
   });
 });
