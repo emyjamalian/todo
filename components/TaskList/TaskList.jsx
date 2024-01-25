@@ -17,10 +17,17 @@ import { deleteTask } from "../Task/functions/deleteTask";
 import { editTask } from "../Task/functions/editTask";
 import { completedTask } from "../Task/functions/completedTask";
 import { useSWRConfig } from "swr";
+import { useTaskStore } from "@/store";
 
 export default function TaskList({ tasks }) {
   const toast = useToast();
   const { mutate } = useSWRConfig();
+  const searchTerm = useTaskStore((state) => state.searchTerm);
+
+  
+  const filteredTasks = tasks.filter(task =>
+    task.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   const handleDeleteTask = async (taskId) => {
     try {
@@ -94,7 +101,8 @@ export default function TaskList({ tasks }) {
 
   return (
     <UnorderedList styleType="none" spacing={5} marginTop={5}>
-      {tasks.map((task) => (
+
+      {filteredTasks.map((task) => (
         <ListItem key={task._id} w="100%">
           <Flex>
             <HStack spacing="12px">
