@@ -76,13 +76,10 @@ export default function TaskList({ tasks }) {
     }
   };
 
-  const handleCompletedTask = async (taskId, event) => {
+  const handleCompletedTask = async (taskId) => {
     try {
-      await completedTask(taskId);
-
-      mutate("/api/tasks");
-
-      if (event.target.checked) {
+      const task = await completedTask(taskId);
+      if (task.completed) {
         if (funMode) {
           confetti.addConfetti({
             emojis: ["🌈", "🐻", "✏️", "✅", "🥳", "🎉", "🦄", "🐻", "🐼"],
@@ -99,8 +96,6 @@ export default function TaskList({ tasks }) {
         }
       }
     } catch (error) {
-      mutate("/api/tasks");
-
       toast({
         title: "Error completing task",
         description: error.message,
@@ -108,6 +103,8 @@ export default function TaskList({ tasks }) {
         duration: 5000,
         isClosable: true,
       });
+    } finally {
+      mutate("/api/tasks");
     }
   };
 
@@ -121,7 +118,7 @@ export default function TaskList({ tasks }) {
                 colorScheme="teal"
                 key={task._id}
                 isChecked={task.completed}
-                onChange={(event) => handleCompletedTask(task._id, event)}
+                onChange={() => handleCompletedTask(task._id)}
               ></Checkbox>
 
               <Editable
