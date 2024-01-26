@@ -14,9 +14,9 @@ import {
   EditablePreview,
 } from "@chakra-ui/react";
 import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
-import { deleteTask } from "../Task/functions/deleteTask";
-import { editTask } from "../Task/functions/editTask";
-import { completedTask } from "../Task/functions/completedTask";
+import { deleteTask } from "../Task/Functions/deleteTask";
+import { editTask } from "../Task/Functions/editTask";
+import { completedTask } from "../Task/Functions/completedTask";
 import { useSWRConfig } from "swr";
 import { useTaskStore } from "@/store";
 import JSConfetti from "js-confetti";

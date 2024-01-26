@@ -7,7 +7,7 @@ import {
   useColorModeValue,
   Divider,
 } from "@chakra-ui/react";
-import Search from "./Search";
+import Search from "./Searchbar";
 import ListsSection from "./ListsSection";
 import DarkMode from "./DarkMode";
 import FunMode from "./FunMode";

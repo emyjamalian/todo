@@ -1,6 +1,6 @@
 import { Input, InputLeftElement, InputGroup } from "@chakra-ui/react";
 import { AddIcon } from "@chakra-ui/icons";
-import AddTask from "./functions/AddTask";
+import AddTask from "./Functions/addTask";
 import { useSWRConfig } from "swr";
 
 export default function AddTaskInput({ afterSubmit }) {
