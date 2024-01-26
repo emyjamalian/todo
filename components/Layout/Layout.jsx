@@ -7,7 +7,15 @@ import { theme } from "../../theme";
 
 const Layout = ({ children, title }) => {
   return (
-    <Box w="100%" display="flex" justifyContent="center" minWidth="500px">
+    <Box
+      h="100%"
+      w="100%"
+      display="flex"
+      justifyContent="center"
+      minWidth="500px"
+      alignItems="center"
+      position="absolute"
+    >
       <SWRConfig>
         <Head>
           <title>{title || "TaskTango"}</title>

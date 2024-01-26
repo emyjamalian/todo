@@ -46,7 +46,6 @@ const IndexPage = () => {
     <Layout title="TaskTango - Home Page">
       <MainContainer mainTitle="All Tasks">
         <SetupModal />
-
         <AddTaskInput />
         <TaskList tasks={tasks} />
       </MainContainer>
