@@ -5,6 +5,7 @@ import TaskList from "@/components/TaskList/TaskList";
 import useSWR from "swr";
 import { Spinner } from "@chakra-ui/react";
 import { useTaskStore } from "@/store";
+import AddTaskInput from "@/components/Task/AddTaskInput";
 
 const UpcomingPage = () => {
   const setActiveList = useTaskStore((state) => state.setActiveList);
@@ -39,6 +40,7 @@ const UpcomingPage = () => {
   return (
     <Layout title="TaskTango - Upcoming">
       <MainContainer mainTitle="Upcoming">
+        <AddTaskInput />
         <TaskList tasks={upcomingTasks} />
       </MainContainer>
     </Layout>
