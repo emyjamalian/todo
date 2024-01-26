@@ -25,10 +25,21 @@ const DonePage = () => {
 
   if (isLoading) {
     return (
-      <>
-        <h1>Loading...</h1>
-        <Spinner size="xl" />
-      </>
+      <Box
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        position="absolute"
+      >
+        <Heading size="xl">Loading...</Heading>
+        <Spinner
+          thickness="4px"
+          speed="0.65s"
+          emptyColor="gray.200"
+          color="teal.400"
+          size="xl"
+        />
+      </Box>
     );
   }
 
