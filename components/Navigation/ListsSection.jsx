@@ -35,7 +35,9 @@ export default function ListsSection() {
             <ListItem
               p="1"
               borderRadius="full"
-              bg={activeList === "TaskTango - Home Page" ? "gray.300" : ""}
+              bg={
+                activeList === "TaskTango - Home Page" ? "teal.400" : ""
+              }
             >
               <Box as="a" href="/" display="flex" alignItems="center">
                 <ListIcon as={HamburgerIcon} />
@@ -49,7 +51,7 @@ export default function ListsSection() {
             <ListItem
               p="1"
               borderRadius="full"
-              bg={activeList === "TaskTango - Upcoming" ? "gray.300" : ""}
+              bg={activeList === "TaskTango - Upcoming" ? "teal.400" : ""}
             >
               <Box as="a" href="/upcoming" alignItems="center" display="flex">
                 <ListIcon as={RepeatClockIcon} />
@@ -63,7 +65,7 @@ export default function ListsSection() {
             <ListItem
               p="1"
               borderRadius="full"
-              bg={activeList === "TaskTango - Done" ? "gray.300" : ""}
+              bg={activeList === "TaskTango - Done" ? "teal.400" : ""}
             >
               <Box as="a" href="/done" alignItems="center" display="flex">
                 <ListIcon as={CheckCircleIcon} />
