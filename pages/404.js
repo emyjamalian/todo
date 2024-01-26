@@ -2,6 +2,7 @@
 import React from "react";
 import Head from "next/head";
 import { Box, Button } from "@chakra-ui/react";
+import { MdReceipt } from "@chakra-ui/icons";
 
 const NotFoundPage = () => {
   return (
@@ -18,14 +19,11 @@ const NotFoundPage = () => {
         <title>404 - Page Not Found</title>
       </Head>
       <h1 style={{ color: "black" }}>404 - Page Not Found</h1>
-      <p style={{ color: "black" }}>
-        Sorry, the page you are looking for does not exist.
-      </p>
-      <Button
-        leftIcon={<EmailIcon />}
-        colorScheme="teal"
-        variant="solid"
-      ></Button>
+      <p style={{ color: "black" }}>Lost? There's no place like home.</p>
+
+      <Button leftIcon={MdReceipt} colorScheme="teal" variant="solid">
+        Home
+      </Button>
     </Box>
   );
 };
