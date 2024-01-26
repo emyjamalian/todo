@@ -18,10 +18,18 @@ const IndexPage = () => {
 
   const setCountingTasks = useTaskStore((state) => state.setCountingTasks);
   setCountingTasks(tasks);
+  if (!tasks) {
+    return;
+  }
 
   if (isLoading) {
     return (
-      <Box>
+      <Box
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        position="absolute"
+      >
         <Heading size="xl">Loading...</Heading>
         <Spinner
           thickness="4px"
@@ -36,10 +44,6 @@ const IndexPage = () => {
 
   if (error) {
     return <div>failed to load</div>;
-  }
-
-  if (!tasks) {
-    return;
   }
 
   return (

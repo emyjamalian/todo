@@ -18,6 +18,9 @@ const UpcomingPage = () => {
   } = useSWR("/api/tasks", async () =>
     (await fetch("/api/status/upcoming")).json()
   );
+  if (!upcomingTasks) {
+    return;
+  }
 
   if (isLoading) {
     return (
@@ -31,10 +34,6 @@ const UpcomingPage = () => {
   if (error) {
     console.error(error);
     return <div>failed to load</div>;
-  }
-
-  if (!upcomingTasks) {
-    return;
   }
 
   return (

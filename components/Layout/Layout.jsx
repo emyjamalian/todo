@@ -12,9 +12,9 @@ const Layout = ({ children, title }) => {
       w="100%"
       display="flex"
       justifyContent="center"
-      minWidth="500px"
       alignItems="center"
       position="absolute"
+      minWidth="500px"
     >
       <SWRConfig>
         <Head>
