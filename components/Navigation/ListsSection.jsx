@@ -11,15 +11,15 @@ import {
   Box,
   Badge,
   Heading,
-  useColorModeValue,
+
 } from "@chakra-ui/react";
 import { useTaskStore } from "@/store";
-import useSWR from "swr";
+
 
 export default function ListsSection() {
   
   const activeList = useTaskStore((state) => state.activeList);
-  const countingTasks = useTaskStore((state) => state.countingTasks);
+  let countingTasks = useTaskStore((state) => state.countingTasks);
 
   const numberOfDoneTasks = countingTasks.filter((task) => task.completed).length;
   const numberOfUpcomingTasks = countingTasks.length - numberOfDoneTasks;
