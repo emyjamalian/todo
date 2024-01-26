@@ -13,7 +13,7 @@ import {
   EditableInput,
   EditablePreview,
 } from "@chakra-ui/react";
-import { DeleteIcon} from "@chakra-ui/icons";
+import { DeleteIcon } from "@chakra-ui/icons";
 import { deleteTask } from "../Task/functions/deleteTask";
 import { editTask } from "../Task/functions/editTask";
 import { completedTask } from "../Task/functions/completedTask";
@@ -110,7 +110,7 @@ export default function TaskList({ tasks }) {
 
   return (
     <UnorderedList styleType="none" spacing={5} marginTop={5}>
-      {tasks.map((task) => (
+      {filteredTasks.map((task) => (
         <ListItem key={task._id} w="100%">
           <Flex>
             <HStack spacing="12px">
