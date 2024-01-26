@@ -1,8 +1,8 @@
 import {
-  ArrowRightIcon,
   CheckCircleIcon,
   CopyIcon,
-  PlusSquareIcon,
+  RepeatClockIcon,
+  HamburgerIcon,
 } from "@chakra-ui/icons";
 import {
   List,
@@ -11,23 +11,18 @@ import {
   Box,
   Badge,
   Heading,
-
+  Spacer,
 } from "@chakra-ui/react";
 import { useTaskStore } from "@/store";
 
-
 export default function ListsSection() {
-  
   const activeList = useTaskStore((state) => state.activeList);
   let countingTasks = useTaskStore((state) => state.countingTasks);
 
-  const numberOfDoneTasks = countingTasks.filter((task) => task.completed).length;
+  const numberOfDoneTasks = countingTasks.filter(
+    (task) => task.completed
+  ).length;
   const numberOfUpcomingTasks = countingTasks.length - numberOfDoneTasks;
-  
-
-  
-
-
 
   return (
     <>
@@ -36,47 +31,50 @@ export default function ListsSection() {
       </Heading>
       <Box overflow="hidden" lineHeight="tight" fontSize="sm" marginBottom="15">
         <nav>
-          <List spacing={5}>
+          <List spacing={3}>
             <ListItem
-              color={activeList === "TaskTango - Home Page" ? "teal" : ""}
-              fontWeight={activeList === "TaskTango - Home Page" ? "bold" : ""}
-              className="menu-item"
+              p="1"
+              borderRadius="full"
+              bg={activeList === "TaskTango - Home Page" ? "gray.300" : ""}
             >
-              <Box as="a" href="/" alignItems="center" display="flex">
-                <ListIcon as={PlusSquareIcon} />
+              <Box as="a" href="/" display="flex" alignItems="center">
+                <ListIcon as={HamburgerIcon} />
                 All Tasks
+                <Spacer />
                 <Badge ml="2" borderRadius="full" px="2" colorScheme="gray">
                   {countingTasks.length}
                 </Badge>
               </Box>
             </ListItem>
             <ListItem
-              className="menu-item"
-              color={activeList === "TaskTango - Upcoming" ? "teal" : ""}
-              fontWeight={activeList === "TaskTango - Upcoming" ? "bold" : ""}
+              p="1"
+              borderRadius="full"
+              bg={activeList === "TaskTango - Upcoming" ? "gray.300" : ""}
             >
               <Box as="a" href="/upcoming" alignItems="center" display="flex">
-                <ListIcon as={ArrowRightIcon} />
+                <ListIcon as={RepeatClockIcon} />
                 Upcoming
+                <Spacer />
                 <Badge ml="2" borderRadius="full" px="2" colorScheme="gray">
                   {numberOfUpcomingTasks}
                 </Badge>
               </Box>
             </ListItem>
             <ListItem
-              className="menu-item"
-              color={activeList === "TaskTango - Done" ? "teal" : ""}
-              fontWeight={activeList === "TaskTango - Done" ? "bold" : ""}
+              p="1"
+              borderRadius="full"
+              bg={activeList === "TaskTango - Done" ? "gray.300" : ""}
             >
               <Box as="a" href="/done" alignItems="center" display="flex">
                 <ListIcon as={CheckCircleIcon} />
                 Done
+                <Spacer />
                 <Badge ml="2" borderRadius="full" px="2" colorScheme="gray">
                   {numberOfDoneTasks}
                 </Badge>
               </Box>
             </ListItem>
-            <ListItem className="menu-item">
+            <ListItem p="1">
               <Box as="a" href="/stickywall" alignItems="center" display="flex">
                 <ListIcon as={CopyIcon} />
                 Sticky Wall
