@@ -15,6 +15,9 @@ const IndexPage = () => {
   const setActiveList = useTaskStore((state) => state.setActiveList);
   setActiveList("TaskTango - Home Page");
 
+  const setCountingTasks = useTaskStore((state) => state.setCountingTasks);
+  setCountingTasks(tasks);
+
   if (isLoading) {
     return (
       <Box>

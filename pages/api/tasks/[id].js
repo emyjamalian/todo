@@ -33,24 +33,21 @@ export default async function handler(request, response) {
   }
 
   if (request.method === "PATCH") {
-    const task = await Task.findById(id);
+    let task = await Task.findById(id);
 
     if (!task) {
       response.status(404).json({ status: "Task not found" });
       return;
     }
 
+    task = await Task.findByIdAndUpdate(
+      id,
+      {
+        $set: { completed: !task.completed },
+      },
+      { new: true }
+    );
 
-    const newCompletedStatus = !task.completed;
-
-    await Task.findByIdAndUpdate(id, {
-      $set: { completed: !task.completed },
-    });
-
-    response.status(200).json({
-      status: `Task ${id} was successfully marked as ${
-        newCompletedStatus ? "done" : "undone"
-      }!`,
-    });
+    response.status(200).json(task);
   }
 }

@@ -38,7 +38,7 @@ export default function Search() {
           aria-label="search"
           placeholder="Search..."
           _placeholder={{ opacity: 1, color: "gray.500" }}
-          // color="black"
+          color="gray.500"
           bg="gray.100"
           focusBorderColor="teal.400"
           borderRadius="full"
@@ -46,10 +46,7 @@ export default function Search() {
         />
         {inputValue ? (
           <InputRightElement width="4.5rem">
-            <CloseButton
-              colorScheme="red"
-              onClick={handleResetSearch}
-            ></CloseButton>
+            <CloseButton color="gray.500" onClick={handleResetSearch}></CloseButton>
           </InputRightElement>
         ) : (
           ""
