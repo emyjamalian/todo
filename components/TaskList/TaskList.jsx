@@ -138,7 +138,7 @@ export default function TaskList({ tasks }) {
               aria-label="Delete a task"
               size="xs"
               color="red.300"
-              margin="0 5px 5px 0"
+              margin="10px"
               icon={<DeleteIcon />}
               onClick={() => handleDeleteTask(task._id)}
             />

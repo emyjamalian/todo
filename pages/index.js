@@ -8,6 +8,7 @@ import useSWR from "swr";
 import { useTaskStore } from "@/store";
 import AddTaskInput from "@/components/Task/AddTaskInput";
 import SetupModal from "@/components/Modal/Modal";
+import MenuContainer from "@/components/Navigation/MenuContainer";
 
 const IndexPage = () => {
   const { data: tasks, isLoading, error } = useSWR("/api/tasks");
@@ -43,8 +44,8 @@ const IndexPage = () => {
 
   return (
     <Layout title="TaskTango - Home Page">
-      <MainContainer mainTitle="All Tasks" flex="1">
-        <SetupModal/>
+      <MainContainer mainTitle="All Tasks">
+        <SetupModal />
         <AddTaskInput />
         <TaskList tasks={tasks} />
       </MainContainer>
