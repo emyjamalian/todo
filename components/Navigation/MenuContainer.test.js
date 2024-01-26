@@ -29,7 +29,7 @@ test("renders a list called 'Lists' with 4 ListItems ", () => {
 
 test("renders a dark mode toggle switch ", () => {
   render(<MenuContainer />);
-  const darkToggle = screen.getByRole("checkbox", { name: /Toggle Light/i });
+  const darkToggle = screen.getByRole("checkbox", { name: /Dark Mode/i });
   expect(darkToggle).toBeInTheDocument();
 });
 
