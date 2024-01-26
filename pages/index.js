@@ -1,12 +1,13 @@
 "use client";
-import { Spinner } from "@chakra-ui/react";
-import MainContainer from "@/components/Navigation/mainContainer";
-import React from "react";
+import MainContainer from "@/components/Navigation/MainContainer";
+import { Spinner, Box, Heading } from "@chakra-ui/react";
+import { React } from "react";
 import Layout from "@/components/Layout/Layout";
-import InputForm from "@/components/Task/AddTaskInput";
 import TaskList from "@/components/TaskList/TaskList";
 import useSWR from "swr";
 import { useTaskStore } from "@/store";
+import AddTaskInput from "@/components/Task/AddTaskInput";
+import SetupModal from "@/components/Modal/Modal";
 
 const IndexPage = () => {
   const { data: tasks, isLoading, error } = useSWR("/api/tasks");
@@ -19,10 +20,16 @@ const IndexPage = () => {
 
   if (isLoading) {
     return (
-      <>
-        <h1>Loading...</h1>
-        <Spinner size="xl" />
-      </>
+      <Box>
+        <Heading size="xl">Loading...</Heading>
+        <Spinner
+          thickness="4px"
+          speed="0.65s"
+          emptyColor="gray.200"
+          color="teal.400"
+          size="xl"
+        />
+      </Box>
     );
   }
 
@@ -37,7 +44,8 @@ const IndexPage = () => {
   return (
     <Layout title="TaskTango - Home Page">
       <MainContainer mainTitle="All Tasks" flex="1">
-        <InputForm />
+        <SetupModal/>
+        <AddTaskInput />
         <TaskList tasks={tasks} />
       </MainContainer>
     </Layout>

@@ -5,6 +5,8 @@ export const useTaskStore = create(
   persist(
     (set) => ({
       funMode: false,
+      setupMode: true,
+      finishSetup: () => set({ setupMode: false }),
       activeList: null,
       setActiveList: (newActiveList) => set({ activeList: newActiveList }),
       searchTerm: "",

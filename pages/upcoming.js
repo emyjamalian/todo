@@ -1,6 +1,6 @@
 "use client";
 import Layout from "@/components/Layout/Layout";
-import MainContainer from "@/components/Navigation/mainContainer";
+import MainContainer from "@/components/Navigation/MainContainer";
 import TaskList from "@/components/TaskList/TaskList";
 import useSWR from "swr";
 import { Spinner } from "@chakra-ui/react";
