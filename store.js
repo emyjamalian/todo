@@ -13,7 +13,24 @@ export const useTaskStore = create(
         set((state) => ({
           funMode: !state.funMode,
         })),
+      countingTasks: [],
+      setCountingTasks: (newCountingTasks) => set({ countingTasks: newCountingTasks }),
+      countCompletedTasks: 0,
+      countActiveTasks: 0,
+
+      setCountCompletedTasks: () => {
+        const count = countingTasks.reduce((count, task) => (task.completed ? count + 1 : count), 0);
+        set({ countCompletedTasks: count });
+      },
+
+      setActiveTasks: () => {
+        const countCompleted = countingTasks.reduce((count, task) => (task.completed ? count + 1 : count), 0);
+        const active = countingTasks.length - countCompleted;
+        set({ countActiveTasks: active });
+      },
     }),
+
+
     {
       name: "task-tango-storage",
       storage: createJSONStorage(() => localStorage),

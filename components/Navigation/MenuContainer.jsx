@@ -2,7 +2,6 @@ import {
   Heading,
   Box,
   Menu,
-  Spacer,
   Flex,
   useColorModeValue,
   Divider,
