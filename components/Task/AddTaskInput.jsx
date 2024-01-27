@@ -13,6 +13,7 @@ export default function AddTaskInput({ afterSubmit }) {
 
     try {
       await AddTask(taskTitle);
+      mutate("/api/tasks");
 
       const inputElement = event.target.elements.title;
       inputElement && inputElement.focus();
