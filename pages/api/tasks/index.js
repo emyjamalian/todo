@@ -5,7 +5,7 @@ export default async function handler(request, response) {
   await dbConnect();
 
   if (request.method === "GET") {
-    const tasks = await Task.find();
+    const tasks = await Task.find().sort("-created_at");
     return response.status(200).json(tasks);
   }
 

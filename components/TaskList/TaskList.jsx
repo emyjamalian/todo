@@ -14,9 +14,9 @@ import {
   EditablePreview,
 } from "@chakra-ui/react";
 import { DeleteIcon } from "@chakra-ui/icons";
-import { deleteTask } from "../Task/functions/deleteTask";
-import { editTask } from "../Task/functions/editTask";
-import { completedTask } from "../Task/functions/completedTask";
+import { deleteTask } from "../Task/Functions/deleteTask";
+import { editTask } from "../Task/Functions/editTask";
+import { completedTask } from "../Task/Functions/completedTask";
 import { useSWRConfig } from "swr";
 import { useTaskStore } from "@/store";
 import JSConfetti from "js-confetti";
@@ -76,13 +76,10 @@ export default function TaskList({ tasks }) {
     }
   };
 
-  const handleCompletedTask = async (taskId, event) => {
+  const handleCompletedTask = async (taskId) => {
     try {
-      await completedTask(taskId);
-
-      mutate("/api/tasks");
-
-      if (event.target.checked) {
+      const task = await completedTask(taskId);
+      if (task.completed) {
         if (funMode) {
           confetti.addConfetti({
             emojis: ["🌈", "🐻", "✏️", "✅", "🥳", "🎉", "🦄", "🐻", "🐼"],
@@ -99,8 +96,6 @@ export default function TaskList({ tasks }) {
         }
       }
     } catch (error) {
-      mutate("/api/tasks");
-
       toast({
         title: "Error completing task",
         description: error.message,
@@ -108,12 +103,14 @@ export default function TaskList({ tasks }) {
         duration: 5000,
         isClosable: true,
       });
+    } finally {
+      mutate("/api/tasks");
     }
   };
 
   return (
     <UnorderedList styleType="none" spacing={5} marginTop={5}>
-      {tasks.map((task) => (
+      {filteredTasks.map((task) => (
         <ListItem key={task._id} w="100%">
           <Flex>
             <HStack spacing="12px">
@@ -121,7 +118,7 @@ export default function TaskList({ tasks }) {
                 colorScheme="teal"
                 key={task._id}
                 isChecked={task.completed}
-                onChange={(event) => handleCompletedTask(task._id, event)}
+                onChange={() => handleCompletedTask(task._id)}
               ></Checkbox>
 
               <Editable
@@ -141,7 +138,7 @@ export default function TaskList({ tasks }) {
               aria-label="Delete a task"
               size="xs"
               color="red.300"
-              margin="0 5px 5px 0"
+              margin="10px"
               icon={<DeleteIcon />}
               onClick={() => handleDeleteTask(task._id)}
             />

@@ -13,6 +13,10 @@ export default function App({ Component, pageProps }) {
           :root {
             --font-rubik: ${fonts.rubik.style.fontFamily};
           }
+          body,
+          html {
+            height: 100%;
+          }
         `}
       </style>
       <ChakraProvider theme={theme}>

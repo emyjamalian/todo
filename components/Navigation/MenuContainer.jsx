@@ -2,12 +2,11 @@ import {
   Heading,
   Box,
   Menu,
-  Spacer,
   Flex,
   useColorModeValue,
   Divider,
 } from "@chakra-ui/react";
-import Search from "./Search";
+import Search from "./Searchbar";
 import ListsSection from "./ListsSection";
 import DarkMode from "./DarkMode";
 import FunMode from "./FunMode";
@@ -30,7 +29,7 @@ export default function MenuContainer() {
         <Box margin="50px 20px">
           <DarkMode />
           <Divider mb={1} />
-          {/* <FunMode /> */}
+          <FunMode />
         </Box>
       </Flex>
     </Box>

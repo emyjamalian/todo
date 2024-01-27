@@ -1,10 +1,11 @@
 "use client";
 import Layout from "@/components/Layout/Layout";
-import MainContainer from "@/components/Navigation/mainContainer";
+import MainContainer from "@/components/Navigation/MainContainer";
 import TaskList from "@/components/TaskList/TaskList";
 import useSWR from "swr";
 import { Spinner } from "@chakra-ui/react";
 import { useTaskStore } from "@/store";
+import AddTaskInput from "@/components/Task/AddTaskInput";
 
 const UpcomingPage = () => {
   const setActiveList = useTaskStore((state) => state.setActiveList);
@@ -17,6 +18,9 @@ const UpcomingPage = () => {
   } = useSWR("/api/tasks", async () =>
     (await fetch("/api/status/upcoming")).json()
   );
+  if (!upcomingTasks) {
+    return;
+  }
 
   if (isLoading) {
     return (
@@ -32,13 +36,10 @@ const UpcomingPage = () => {
     return <div>failed to load</div>;
   }
 
-  if (!upcomingTasks) {
-    return;
-  }
-
   return (
     <Layout title="TaskTango - Upcoming">
       <MainContainer mainTitle="Upcoming">
+        <AddTaskInput />
         <TaskList tasks={upcomingTasks} />
       </MainContainer>
     </Layout>
