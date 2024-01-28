@@ -1,6 +1,7 @@
 ## About The Project
 
 Task Tango is a simple to-do app with some basic "TODO list" functionality.
+[Visit TaskTango](https://tasktango.vercel.app/)
 
 <!--will add image later ![user interface of the app](./readme/user-interface.png) -->
 
