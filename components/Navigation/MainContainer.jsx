@@ -5,7 +5,7 @@ export default function MainContainer({ mainTitle, children }) {
   return (
     <Box
       p="6"
-      w="500px"
+      width={['100%', 500]}
       height="500px"
       border="2px"
       borderColor="gray.300"

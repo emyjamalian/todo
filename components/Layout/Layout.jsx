@@ -7,26 +7,25 @@ import { theme } from "../../theme";
 
 const Layout = ({ children, title }) => {
   return (
-    <Box
-      h="100%"
-      w="100%"
-      display="flex"
-      justifyContent="center"
-      alignItems="center"
-      position="absolute"
-      minWidth="500px"
-    >
-      <SWRConfig>
-        <Head>
-          <title>{title || "TaskTango"}</title>
-        </Head>
-        <ColorModeScript initialColorMode={theme.config.initialColorMode} />
-        <Wrap style={{ display: "flex", margin: 8, gap: 8 }}>
-          <MenuContainer />
-          {children}
-        </Wrap>
-      </SWRConfig>
-    </Box>
+    <SWRConfig>
+      <Head>
+        <title>{title || "TaskTango"}</title>
+      </Head>
+      <ColorModeScript initialColorMode={theme.config.initialColorMode} />
+      <Box
+        h="100%"
+        w="100%"
+        justifyContent="center"
+        alignItems="center"
+        position="absolute"
+        minWidth="500px"
+        display={{ base: "flex", md: "flex" }} // flex layout on medium and larger screens
+        flexDirection={{ base: "column-reverse", md: "row" }} // column layout on smaller screens
+      >
+        <MenuContainer />
+        {children}
+      </Box>
+    </SWRConfig>
   );
 };
 

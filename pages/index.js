@@ -47,13 +47,14 @@ const IndexPage = () => {
   }
 
   return (
-    <Layout title="TaskTango - Home Page">
-      <MainContainer mainTitle="All Tasks">
-        <SetupModal />
-        <AddTaskInput />
-        <TaskList tasks={tasks} />
-      </MainContainer>
-    </Layout>
+   
+      <Layout title="TaskTango - Home Page">
+        <MainContainer mainTitle="All Tasks">
+          <SetupModal />
+          <AddTaskInput />
+          <TaskList tasks={tasks} />
+        </MainContainer>
+      </Layout>
   );
 };
 

@@ -109,10 +109,10 @@ export default function TaskList({ tasks }) {
   };
 
   return (
-    <UnorderedList styleType="none" spacing={5} marginTop={5}>
+    <UnorderedList styleType="none" spacing={2} marginTop={5}>
       {filteredTasks.map((task) => (
         <ListItem key={task._id}>
-          <Flex>
+          <Flex alignItems="center">
             <HStack spacing="12px">
               <Checkbox
                 colorScheme="teal"

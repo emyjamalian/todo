@@ -5,6 +5,7 @@ import {
   Flex,
   useColorModeValue,
   Divider,
+  Container
 } from "@chakra-ui/react";
 import Search from "./Searchbar";
 import ListsSection from "./ListsSection";
@@ -15,14 +16,16 @@ export default function MenuContainer() {
   const bg = useColorModeValue("gray.200", "gray.700");
 
   return (
-    <Box p="4" width="346px" height="500px" borderRadius="50px" bg={bg}>
+    <Box p="4" width={['100%', 346]} height="500px" borderRadius="50px" bg={bg}>
       <Flex direction="column" justifyContent="space-between">
         <Box p="4">
+          <Container display={["none", "inherit"]}>
           <Heading paddingbottom="5" as="h5" size="2xl" mb={5} noOfLines={1}>
             Menu
             <Menu></Menu>
           </Heading>
           <Search />
+          </Container>
           <ListsSection />
         </Box>
 
