@@ -15,7 +15,7 @@ export default function MenuContainer() {
   const bg = useColorModeValue("gray.200", "gray.700");
 
   return (
-    <Box p="4" maxWidth="346px" minH="500px" borderRadius="50px" bg={bg}>
+    <Box p="4" width="346px" height="500px" borderRadius="50px" bg={bg}>
       <Flex direction="column" justifyContent="space-between">
         <Box p="4">
           <Heading paddingbottom="5" as="h5" size="2xl" mb={5} noOfLines={1}>

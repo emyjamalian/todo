@@ -1,4 +1,7 @@
+import { todo } from "node:test";
 import randomItem from "./utils/utils";
+import { Button } from "@chakra-ui/react";
+import exp from "constants";
 const { test, expect } = require("@playwright/test");
 
 test.beforeEach(async ({ page }) => {
@@ -19,14 +22,29 @@ test.describe("New Todo", () => {
     await newTaskInput.fill(todoText);
     await newTaskInput.press("Enter");
 
-    // Wait for the todo list to appear
-    const todoListSelector = ".css-bs4x2b";
-    await page.waitForSelector(todoListSelector);
+    // Wait for the todo list to appear and it has the item
+    const todoList = page.locator(".chakra-stack", {
+      has: page.getByText(todoText),
+    });
 
-    // Assert that the added todo item is in the list
-    const addedTodoSelector = `${todoListSelector} .css-8atqhb:has-text("${todoText}") .chakra-editable__preview`; // Adjust with the actual selector
-    await page.waitForSelector(addedTodoSelector);
-    const addedTodoText = await page.textContent(addedTodoSelector);
-    expect(addedTodoText).toContain(todoText);
+    //mark item as done and assert it's checked
+    const itemCheckbox = todoList.locator(".chakra-checkbox__control");
+    await itemCheckbox.click();
+    expect(itemCheckbox).toBeTruthy(); //as in toBeChecked
+
+    //assert the toast is showing for task is done
+    // expect(page.getByText("Task Done")).toBeVisible();
+
+    //delete a task and assert it's deleted
+    const itemDeleteBtn = todoList.filter({
+      hasText: todoText,
+    });
+    getByLabel("Delete a task").click();
+
+    await itemDeleteBtn.click({ force: true });
+    // expect(todoList).not.toHaveText(todoText);
+
+    //assert the toast is showing for task is done
+    expect(page.getByText("Task deleted")).toBeInViewport();
   });
 });

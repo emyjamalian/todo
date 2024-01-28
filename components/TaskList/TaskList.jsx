@@ -111,7 +111,7 @@ export default function TaskList({ tasks }) {
   return (
     <UnorderedList styleType="none" spacing={5} marginTop={5}>
       {filteredTasks.map((task) => (
-        <ListItem key={task._id} w="100%">
+        <ListItem key={task._id}>
           <Flex>
             <HStack spacing="12px">
               <Checkbox
@@ -122,6 +122,7 @@ export default function TaskList({ tasks }) {
               ></Checkbox>
 
               <Editable
+                width="300px"
                 defaultValue={task.title}
                 onSubmit={(nextValue) => handleEditTask(task._id, nextValue)}
               >

@@ -24,8 +24,8 @@ export default function Search() {
   };
 
   return (
-    <form>
-      <InputGroup width={250}>
+    <form width={280}>
+      <InputGroup>
         <InputLeftElement pointerEvents="none">
           <Search2Icon color="black" />
         </InputLeftElement>
@@ -42,11 +42,13 @@ export default function Search() {
           bg="gray.100"
           focusBorderColor="teal.400"
           borderRadius="full"
-          width="auto"
         />
         {inputValue ? (
           <InputRightElement width="4.5rem">
-            <CloseButton color="gray.500" onClick={handleResetSearch}></CloseButton>
+            <CloseButton
+              color="gray.500"
+              onClick={handleResetSearch}
+            ></CloseButton>
           </InputRightElement>
         ) : (
           ""
