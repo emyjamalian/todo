@@ -14,7 +14,7 @@ Then you'll be able to navigate to the `localhost:3000` in your browser and use 
 
 ## Running tests
 
-### E2E tests (Cypress)
+### E2E tests (Playwright)
 
 - Navigate to the `tests/e2e` folder
 - `npm install`
