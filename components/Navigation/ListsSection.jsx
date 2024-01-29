@@ -43,7 +43,11 @@ export default function ListsSection() {
               bg={activeList === "TaskTango - Home Page" ? "teal.400" : ""}
             >
               <Box as="a" href="/" display="flex" alignItems="center">
-                <ListIcon as={HamburgerIcon} marginRight={["0px", "8px"]} />
+                <ListIcon
+                  as={HamburgerIcon}
+                  marginRight={["0px", "8px"]}
+                  boxSize="2em"
+                />
                 <Text display={["none", "unset"]}>All Tasks</Text>
                 <Spacer />
                 <Badge
@@ -63,7 +67,11 @@ export default function ListsSection() {
               bg={activeList === "TaskTango - Upcoming" ? "teal.400" : ""}
             >
               <Box as="a" href="/upcoming" alignItems="center" display="flex">
-                <ListIcon as={RepeatClockIcon} marginRight={["0px", "8px"]} />
+                <ListIcon
+                  as={RepeatClockIcon}
+                  marginRight={["0px", "8px"]}
+                  boxSize="2em"
+                />
                 <Text display={["none", "unset"]}>Upcoming</Text>
                 <Spacer />
                 <Badge
@@ -83,7 +91,11 @@ export default function ListsSection() {
               bg={activeList === "TaskTango - Done" ? "teal.400" : ""}
             >
               <Box as="a" href="/done" alignItems="center" display="flex">
-                <ListIcon as={CheckCircleIcon} marginRight={["0px", "8px"]} />
+                <ListIcon
+                  as={CheckCircleIcon}
+                  marginRight={["0px", "8px"]}
+                  boxSize="2em"
+                />
                 <Text display={["none", "unset"]}>Done</Text>
                 <Spacer />
                 <Badge
