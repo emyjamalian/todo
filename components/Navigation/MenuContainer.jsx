@@ -1,4 +1,10 @@
-import { Heading, Box, Menu, Flex, useColorModeValue } from "@chakra-ui/react";
+import {
+  Heading,
+  Box,
+  Spacer,
+  Flex,
+  useColorModeValue,
+} from "@chakra-ui/react";
 import Search from "./Searchbar";
 import ListsSection from "./ListsSection";
 import DarkMode from "./DarkMode";
@@ -12,12 +18,12 @@ export default function MenuContainer() {
       display="flex"
       justifyContent="center"
       p={["4", "8"]}
-      width={["100%", 300]}
+      width={["100%", "300px"]}
       height={["10%", "500px"]}
       borderRadius={["50px", "50px"]}
       bg={bg}
     >
-      <Flex direction={["none", "column"]} justifyContent="space-evenly">
+      <Flex direction={["none", "column"]}>
         <Box display={["none", "unset"]}>
           <Heading paddingbottom="5" as="h5" size="2xl" mb={5} noOfLines={1}>
             Menu
@@ -25,6 +31,8 @@ export default function MenuContainer() {
           <Search />
         </Box>
         <ListsSection />
+        <Spacer />
+
         <Box display={["none", "unset"]}>
           <DarkMode />
           <FunMode />
