@@ -18,14 +18,12 @@ const Layout = ({ children, title }) => {
         justifyContent="center"
         alignItems="center"
         position="absolute"
-     
         display={{ base: "flex", md: "flex" }} // flex layout on medium and larger screens
         flexDirection={{ base: "column-reverse", md: "row" }} // column layout on smaller screens
+        gap="8px"
       >
-       
         <MenuContainer />
         {children}
-        
       </Box>
     </SWRConfig>
   );
