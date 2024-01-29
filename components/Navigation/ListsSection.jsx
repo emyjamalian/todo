@@ -46,7 +46,7 @@ export default function ListsSection() {
                 <ListIcon
                   as={HamburgerIcon}
                   marginRight={["0px", "8px"]}
-                  boxSize="2em"
+                  boxSize={["2em", "1em"]}
                 />
                 <Text display={["none", "unset"]}>All Tasks</Text>
                 <Spacer />
@@ -70,7 +70,7 @@ export default function ListsSection() {
                 <ListIcon
                   as={RepeatClockIcon}
                   marginRight={["0px", "8px"]}
-                  boxSize="2em"
+                  boxSize={["2em", "1em"]}
                 />
                 <Text display={["none", "unset"]}>Upcoming</Text>
                 <Spacer />
@@ -94,7 +94,7 @@ export default function ListsSection() {
                 <ListIcon
                   as={CheckCircleIcon}
                   marginRight={["0px", "8px"]}
-                  boxSize="2em"
+                  boxSize={["2em", "1em"]}
                 />
                 <Text display={["none", "unset"]}>Done</Text>
                 <Spacer />
