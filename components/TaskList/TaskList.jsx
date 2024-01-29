@@ -122,7 +122,7 @@ export default function TaskList({ tasks }) {
               ></Checkbox>
 
               <Editable
-                width="300px"
+                
                 defaultValue={task.title}
                 onSubmit={(nextValue) => handleEditTask(task._id, nextValue)}
               >

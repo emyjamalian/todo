@@ -6,7 +6,7 @@ export default function MainContainer({ mainTitle, children }) {
     <Box
       p="6"
       width={['100%', 500]}
-      height="500px"
+      height={["90%", "500px"]}
       border="2px"
       borderColor="gray.300"
       borderRadius="50px"

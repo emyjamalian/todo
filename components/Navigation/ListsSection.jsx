@@ -12,6 +12,7 @@ import {
   Badge,
   Heading,
   Spacer,
+  Text,
 } from "@chakra-ui/react";
 import { useTaskStore } from "@/store";
 
@@ -26,24 +27,33 @@ export default function ListsSection() {
 
   return (
     <>
-      <Heading paddingTop="5" size="sm" mb={5} noOfLines={1}>
-        {"Lists"}
+      <Heading display={["none", "unset"]} paddingTop="3" size="sm" mb={3}>
+        Lists
       </Heading>
-      <Box overflow="hidden" lineHeight="tight" fontSize="sm" marginBottom="15">
+      <Box fontSize="sm">
         <nav>
-          <List spacing={3}>
+          <List
+          width={["100%", "inherit"]}
+            display={["flex", "unset"]}
+            spacing={3}
+            alignItems="space-evenly"
+          >
             <ListItem
               p="1"
               borderRadius="full"
-              bg={
-                activeList === "TaskTango - Home Page" ? "teal.400" : ""
-              }
+              bg={activeList === "TaskTango - Home Page" ? "teal.400" : ""}
             >
               <Box as="a" href="/" display="flex" alignItems="center">
                 <ListIcon as={HamburgerIcon} />
-                All Tasks
+                <Text display={["none", "unset"]}>All Tasks</Text>
                 <Spacer />
-                <Badge ml="2" borderRadius="full" px="2" colorScheme="gray">
+                <Badge
+                  display={["none", "unset"]}
+                  ml="2"
+                  borderRadius="full"
+                  px="2"
+                  colorScheme="gray"
+                >
                   {countingTasks.length}
                 </Badge>
               </Box>
@@ -55,9 +65,15 @@ export default function ListsSection() {
             >
               <Box as="a" href="/upcoming" alignItems="center" display="flex">
                 <ListIcon as={RepeatClockIcon} />
-                Upcoming
+                <Text display={["none", "unset"]}>Upcoming</Text>
                 <Spacer />
-                <Badge ml="2" borderRadius="full" px="2" colorScheme="gray">
+                <Badge
+                  display={["none", "unset"]}
+                  ml="2"
+                  borderRadius="full"
+                  px="2"
+                  colorScheme="gray"
+                >
                   {numberOfUpcomingTasks}
                 </Badge>
               </Box>
@@ -69,14 +85,20 @@ export default function ListsSection() {
             >
               <Box as="a" href="/done" alignItems="center" display="flex">
                 <ListIcon as={CheckCircleIcon} />
-                Done
+                <Text display={["none", "unset"]}>Done</Text>
                 <Spacer />
-                <Badge ml="2" borderRadius="full" px="2" colorScheme="gray">
+                <Badge
+                  display={["none", "unset"]}
+                  ml="2"
+                  borderRadius="full"
+                  px="2"
+                  colorScheme="gray"
+                >
                   {numberOfDoneTasks}
                 </Badge>
               </Box>
             </ListItem>
-            <ListItem p="1">
+            <ListItem display={["none", "unset"]} p="1">
               <Box as="a" href="/stickywall" alignItems="center" display="flex">
                 <ListIcon as={CopyIcon} />
                 Sticky Wall

@@ -24,7 +24,7 @@ export default function Search() {
   };
 
   return (
-    <form width={280}>
+    <form width="100%">
       <InputGroup>
         <InputLeftElement pointerEvents="none">
           <Search2Icon color="black" />
