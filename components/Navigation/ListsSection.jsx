@@ -30,12 +30,12 @@ export default function ListsSection() {
       <Heading display={["none", "unset"]} paddingTop="3" size="sm" mb={3}>
         Lists
       </Heading>
-      <Box fontSize="sm">
+      <Box fontSize="sm" width={["250px", "100%"]}>
         <nav>
           <List
             width={["100%", "inherit"]}
             display={["flex", "unset"]}
-            justifyContent={["space-evenly"]}
+            justifyContent="space-evenly"
           >
             <ListItem
               p="1"
@@ -43,7 +43,7 @@ export default function ListsSection() {
               bg={activeList === "TaskTango - Home Page" ? "teal.400" : ""}
             >
               <Box as="a" href="/" display="flex" alignItems="center">
-                <ListIcon as={HamburgerIcon} />
+                <ListIcon as={HamburgerIcon} marginRight={["0px", "8px"]} />
                 <Text display={["none", "unset"]}>All Tasks</Text>
                 <Spacer />
                 <Badge
@@ -63,7 +63,7 @@ export default function ListsSection() {
               bg={activeList === "TaskTango - Upcoming" ? "teal.400" : ""}
             >
               <Box as="a" href="/upcoming" alignItems="center" display="flex">
-                <ListIcon as={RepeatClockIcon} />
+                <ListIcon as={RepeatClockIcon} marginRight={["0px", "8px"]} />
                 <Text display={["none", "unset"]}>Upcoming</Text>
                 <Spacer />
                 <Badge
@@ -83,7 +83,7 @@ export default function ListsSection() {
               bg={activeList === "TaskTango - Done" ? "teal.400" : ""}
             >
               <Box as="a" href="/done" alignItems="center" display="flex">
-                <ListIcon as={CheckCircleIcon} />
+                <ListIcon as={CheckCircleIcon} marginRight={["0px", "8px"]} />
                 <Text display={["none", "unset"]}>Done</Text>
                 <Spacer />
                 <Badge
@@ -97,12 +97,12 @@ export default function ListsSection() {
                 </Badge>
               </Box>
             </ListItem>
-            <ListItem display={["none", "unset"]} p="1">
+            {/* <ListItem display={["none", "unset"]} p="1">
               <Box as="a" href="/stickywall" alignItems="center" display="flex">
                 <ListIcon as={CopyIcon} />
                 Sticky Wall
               </Box>
-            </ListItem>
+            </ListItem> */}
           </List>
         </nav>
       </Box>
