@@ -33,10 +33,9 @@ export default function ListsSection() {
       <Box fontSize="sm">
         <nav>
           <List
-          width={["100%", "inherit"]}
+            width={["100%", "inherit"]}
             display={["flex", "unset"]}
-            spacing={3}
-            alignItems="space-evenly"
+            justifyContent={["space-evenly"]}
           >
             <ListItem
               p="1"

@@ -10,23 +10,24 @@ export default function MenuContainer() {
   return (
     <Box
       display="flex"
-      p={["4","8"]}
+      justifyContent="center"
+      p={["4", "8"]}
       width={["100%", 300]}
       height={["10%", "500px"]}
-      borderRadius={["50px","50px"]}
+      borderRadius={["50px", "50px"]}
       bg={bg}
     >
-      <Flex direction={["none","column"]} justifyContent="space-evenly">
-        <Box display={["none", "unset" ]}>
-        <Heading paddingbottom="5" as="h5" size="2xl" mb={5} noOfLines={1}>
-          Menu
-        </Heading>
-        <Search />
+      <Flex direction={["none", "column"]} justifyContent="space-evenly">
+        <Box display={["none", "unset"]}>
+          <Heading paddingbottom="5" as="h5" size="2xl" mb={5} noOfLines={1}>
+            Menu
+          </Heading>
+          <Search />
         </Box>
         <ListsSection />
-        <Box display={["none", "unset" ]}>
-        <DarkMode />
-        <FunMode />
+        <Box display={["none", "unset"]}>
+          <DarkMode />
+          <FunMode />
         </Box>
       </Flex>
     </Box>
