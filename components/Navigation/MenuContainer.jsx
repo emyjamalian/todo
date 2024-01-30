@@ -19,19 +19,24 @@ export default function MenuContainer() {
       justifyContent="center"
       p={["4", "8"]}
       width={["100%", "300px"]}
-      height={["10%", "500px"]}
-      borderRadius={["50px", "50px"]}
+      height={["12%", "500px"]}
+      borderRadius={["0", "50px"]}
       bg={bg}
+      pt={[0 , 10]}
+      pb={[0 , 10]}
+      
     >
-      <Flex direction={["none", "column"]}>
+      
+      <Flex direction={["none", "column"]} gap={["0", "2"]}>
         <Box display={["none", "unset"]}>
-          <Heading paddingbottom="5" as="h5" size="2xl" mb={5} noOfLines={1}>
+          <Heading paddingbottom="10px" as="h5" size="2xl" mb={8}>
             Menu
           </Heading>
+          
           <Search />
         </Box>
         <ListsSection />
-        <Spacer />
+        <Spacer/>
 
         <Box display={["none", "unset"]}>
           <DarkMode />

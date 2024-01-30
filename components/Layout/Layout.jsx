@@ -20,7 +20,7 @@ const Layout = ({ children, title }) => {
         position="absolute"
         display={{ base: "flex", md: "flex" }} // flex layout on medium and larger screens
         flexDirection={{ base: "column-reverse", md: "row" }} // column layout on smaller screens
-        gap="8px"
+        gap={["0px", "8px"]}
       >
         <MenuContainer />
         {children}

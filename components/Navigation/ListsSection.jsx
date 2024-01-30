@@ -30,12 +30,16 @@ export default function ListsSection() {
       <Heading display={["none", "unset"]} paddingTop="3" size="sm" mb={3}>
         Lists
       </Heading>
-      <Box fontSize="sm" width={["250px", "100%"]}>
+      <Box fontSize="sm" width={["250px", "100%"]}
+      alignSelf="center">
         <nav>
           <List
             width={["100%", "inherit"]}
             display={["flex", "unset"]}
             justifyContent="space-evenly"
+            alignItems={["center", "unset"]}
+            gap={["25px", "0px"]}
+            spacing={["0px", "10px"]}
           >
             <ListItem
               p="1"

@@ -5,22 +5,22 @@ export default function MainContainer({ mainTitle, children }) {
   return (
     <Box
       p="6"
-      width={['100%', 500]}
-      height={["90%", "500px"]}
+      width={["100%", 500]}
+      height={["88%", "500px"]}
       border="2px"
       borderColor="gray.300"
-      borderRadius="50px"
+      borderRadius={["0", "50px"]}
       overflowY="auto"
+      pt={["10","auto"]}
     >
       <Container>
         <Heading
-          display="flex"
-          alignContent="baseline"
-          pb={5}
+         
+          pb={8}
           as="h3"
           size="3xl"
-          mb={5}
-          noOfLines={1}
+          
+          
         >
           {mainTitle}
         </Heading>
