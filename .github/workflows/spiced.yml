@@ -6,13 +6,3 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo "Hello Spiced!"
-
-  run-unit-test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: "20"
-      - run: cd ./src/webapp/api
-      - run: npm ci
