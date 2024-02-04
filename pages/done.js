@@ -5,12 +5,8 @@ import MainContainer from "@/components/Navigation/MainContainer";
 import TaskList from "@/components/TaskList/TaskList";
 import useSWR from "swr";
 import { Spinner } from "@chakra-ui/react";
-import { useTaskStore } from "@/store";
 
 const DonePage = () => {
-  const setActiveList = useTaskStore((state) => state.setActiveList);
-  setActiveList("TaskTango - Done");
-
   const {
     data: doneTasks,
     isLoading,

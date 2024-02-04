@@ -5,16 +5,11 @@ import { React } from "react";
 import Layout from "@/components/Layout/Layout";
 import TaskList from "@/components/TaskList/TaskList";
 import useSWR from "swr";
-import { useTaskStore } from "@/store";
 import AddTaskInput from "@/components/Task/AddTaskInput";
 import SetupModal from "@/components/Modal/Modal";
-import MenuContainer from "@/components/Navigation/MenuContainer";
 
 const IndexPage = () => {
   const { data: tasks, isLoading, error } = useSWR("/api/tasks");
-
-  const setActiveList = useTaskStore((state) => state.setActiveList);
-  setActiveList("TaskTango - Home Page");
 
   const setCountingTasks = useTaskStore((state) => state.setCountingTasks);
   setCountingTasks(tasks);
@@ -47,14 +42,13 @@ const IndexPage = () => {
   }
 
   return (
-   
-      <Layout title="TaskTango - Home Page">
-        <MainContainer mainTitle="All Tasks">
-          <SetupModal />
-          <AddTaskInput />
-          <TaskList tasks={tasks} />
-        </MainContainer>
-      </Layout>
+    <Layout title="TaskTango - Home Page">
+      <MainContainer mainTitle="All Tasks">
+        <SetupModal />
+        <AddTaskInput />
+        <TaskList tasks={tasks} />
+      </MainContainer>
+    </Layout>
   );
 };
 
