@@ -1,4 +1,4 @@
-name: say-hello-testbash-actions
+name: say-hello-Spiced-actions
 run-name: ${{ github.actor }} Hello Spiced!
 on: [push]
 jobs:
