@@ -22,6 +22,8 @@ const TODO_ITEMS = [
   "Write a note of encouragement to yourself and place it where you'll see it regularly.",
 ];
 
-let randomItem = TODO_ITEMS[Math.floor(Math.random() * TODO_ITEMS.length)];
+function randomItem() {
+  return TODO_ITEMS[Math.floor(Math.random() * TODO_ITEMS.length)];
+}
 
 export default randomItem;
