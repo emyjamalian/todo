@@ -13,7 +13,7 @@ test.describe("New Todo", () => {
       'input[placeholder="Add new task"]'
     );
     // Create 1st todo.
-    const todoText = randomItem;
+    const todoText = randomItem();
     await newTaskInput.fill(todoText);
     await newTaskInput.press("Enter");
 
@@ -39,17 +39,21 @@ test.describe("New Todo", () => {
       'input[placeholder="Add new task"]'
     );
     // Create 2st todo.
-    const todoText2 = randomItem;
+    const todoText2 = randomItem();
     await newTaskInput.fill(todoText2);
     await newTaskInput.press("Enter");
 
     //find task in the tasklist
     const ListItem2 = page.getByRole("listitem").filter({ hasText: todoText2 });
 
+    await ListItem2.waitFor();
+
     //delete a task and assert it's deleted
     const itemDeleteBtn = ListItem2.locator(
       'button[aria-label="Delete a task"]'
     );
+
+    await itemDeleteBtn.waitFor();
 
     //delete on the latest added even if there are multiple ones
     await itemDeleteBtn.first().click();
