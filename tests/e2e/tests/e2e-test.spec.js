@@ -46,14 +46,14 @@ test.describe("New Todo", () => {
     //find task in the tasklist
     const ListItem2 = page.getByRole("listitem").filter({ hasText: todoText2 });
 
-    await ListItem2.waitFor().first();
+    await ListItem2.waitFor();
 
     //delete a task and assert it's deleted
     const itemDeleteBtn = ListItem2.locator(
       'button[aria-label="Delete a task"]'
     );
 
-    await itemDeleteBtn.waitFor().first();
+    await itemDeleteBtn.waitFor();
 
     //delete on the latest added even if there are multiple ones
     await itemDeleteBtn.first().click();
