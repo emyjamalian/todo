@@ -30,8 +30,7 @@ export default function ListsSection() {
       <Heading display={["none", "unset"]} paddingTop="3" size="sm" mb={3}>
         Lists
       </Heading>
-      <Box fontSize="sm" width={["250px", "100%"]}
-      alignSelf="center">
+      <Box fontSize="sm" width={["250px", "100%"]} alignSelf="center">
         <nav>
           <List
             width={["100%", "inherit"]}
